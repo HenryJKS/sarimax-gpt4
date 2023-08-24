@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gráfico</title>
+    </head>
+    <body>
+        <h1>Gráfico</h1>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <form method="post">
+            <label for="x_values">Valores de X:</label><br>
+            <input type="text" id="x_values" name="x_values"><br>
+            <label for="y_values">Valores de Y:</label><br>
+            <input type="text" id="y_values" name="y_values"><br><br>
+            <input type="submit" value="Plotar">
+        </form>
+        {% if plot_url %}
+            <h2>Gráfico</h2>
+            <img src="data:image/png;base64,{{ plot_url }}">
+        {% endif %}
+    </body>
+</html>
