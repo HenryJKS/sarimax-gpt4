@@ -32,8 +32,10 @@ def index():
         # Codificar a imagem em base64
         plot_url = base64.b64encode(img.getvalue()).decode()
 
+        # Retornar o template com o gráfico
         return render_template('index.html', plot_url=plot_url)
     else:
+        # Retornar o template
         return render_template('index.html')
 
 
