@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template
+import plotly.express as px
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+# werkzeug é um servidor web para desenvolvimento
+from werkzeug.serving import run_simple
 
 app = Flask(__name__)
 
@@ -20,6 +23,9 @@ def index():
         except ValueError:
             # Os valores não são validos
             return render_template('index.html', error='Por favor insire valores válidos')
+
+        print(f'x: ' + str(x_values))
+        print(f'y: ' + str(y_values))
 
         # Plotar o gráfico
         plt.plot(x_values, y_values)
@@ -40,7 +46,4 @@ def index():
 
 
 if __name__ == '__main__':
-    # werkzeug é um servidor web para desenvolvimento
-    from werkzeug.serving import run_simple
-
     run_simple('localhost', 5000, app)
