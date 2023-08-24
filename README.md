@@ -12,3 +12,8 @@
 * Criando Prompt Inicial
 * Instalando outras Dependencias
 * Testando Plotamento com Flask
+
+# Atualização 24/08
+
+* Atualizando Prompt
+* Testando em Dash
