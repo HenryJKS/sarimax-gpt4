@@ -17,3 +17,8 @@
 
 * Atualizando Prompt
 * Testando em Dash
+
+# Atualização 25/08
+
+* Atualizando o InputDash
+# Melhorando interatividade com chatGPT

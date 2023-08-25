@@ -9,7 +9,10 @@ from TestingOpenAI import chat
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.FLATLY])
 
 app.layout = dbc.Container([
-    html.H1("Plotagem de Gráfico"),
+
+    dbc.Row([
+        html.H1("Plotagem de Gráfico", className='text-center'),
+    ]),
 
     dbc.Col([
         dbc.Row([
@@ -22,21 +25,37 @@ app.layout = dbc.Container([
         ]),
         dbc.Row([
             html.Button('Plotar Gráfico', id='submit-button',
-                        className='btn btn-primary',
+                        className='btn btn-primary btn-sm',
                         style={'width': '25%'})
         ])
     ]),
 
-    dbc.Container([
+    dbc.Row([
         dcc.Graph(id='graph'),
     ]),
 
-    html.Div([], id='valores')
+    dbc.Row([
+        html.H5('Análise Gráfica: ')
+    ]),
+
+    html.Div([
+    ], id='valores'),
+
+    html.Hr(),
+
+    html.Div([
+        dcc.Input(id='question', type='text', placeholder='Digite uma dúvida: '),
+        html.Button('Enviar', id='send-response', className='btn btn-primary btn-sm')
+    ], style={'width': '50%'}),
+
+    html.Div([
+        html.H5('Resposta:')
+    ])
 
 ], fluid=True)
 
 
-@app.callback(
+@callback(
     Output('graph', 'figure'),
     Output('valores', 'children'),
     Input('submit-button', 'n_clicks'),
@@ -44,7 +63,6 @@ app.layout = dbc.Container([
     State('y-values', 'value')
 )
 def create_graph(n_clicks, x_values_str, y_values_str):
-
     if not n_clicks:
         return dash.no_update, dash.no_update
 
@@ -71,10 +89,12 @@ def create_graph(n_clicks, x_values_str, y_values_str):
     # Gerando grafico
     fig = px.line(x=x_values, y=y_values, title='Gráfico')
 
-    frase = chat('x' + str(x_values) + 'y' + str(y_values) + 'previsão de Abril?')
+    frase = chat('Eixo x:' + str(x_values) + 'Eixo y:' + str(y_values))
 
     # Retornando para os Outputs
     return fig, html.H4(frase)
+
+
 
 
 if __name__ == '__main__':
