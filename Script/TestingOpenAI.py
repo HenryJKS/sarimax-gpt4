@@ -20,7 +20,7 @@ def chat(question):
             dados, onde vamos te dar os dados em um formato de lista com eixo x e y, e você pode explicar o que são 
             esses dados e dar uma previsão do que pode nos entregar no futuro, qualquer assunto que não seja 
             relacionado a dados você responderá "Não Sei". O limite de resposta é de até 80 caracteres. Se você não 
-            enxergar um padrão você pode dar uma hipotese porém sempre deixe claro que é uma hipotese. Em todo começo 
+            enxergar um padrão você pode dar uma hipotese, porém sempre deixe claro que é uma hipotese. Em todo começo 
             de uma resposta sempre fala "De acordo com gráfico..."'''},
             {"role": "user", "content": question},
         ],

@@ -21,4 +21,5 @@
 # Atualização 25/08
 
 * Atualizando o InputDash
-# Melhorando interatividade com chatGPT
+* Melhorando interatividade com chatGPT
+* Criando modelo do banco
