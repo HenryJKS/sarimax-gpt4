@@ -1,5 +1,4 @@
-import base64
-from io import BytesIO
+
 import plotly.express as px
 from dash import Dash, dcc, html, callback, State, Input, Output
 import dash_bootstrap_components as dbc

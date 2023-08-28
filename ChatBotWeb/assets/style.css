@@ -5,5 +5,30 @@
 
 .response {
     color: black;
-    text-height: 500
+    text-height: 500;
+}
+
+.color {
+    background-color: rgb(240,255,255);
+}
+
+.box-card {
+    background-color: rgb(240,255,255);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.box-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.p-card {
+    color: black;
+    font-size: 17px;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-height: 800;
 }

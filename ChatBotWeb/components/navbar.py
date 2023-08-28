@@ -5,12 +5,12 @@ import dash_bootstrap_components as dbc
 def create_navbar():
     navbar = dbc.Navbar(
         [
-            html.A(dbc.NavbarBrand("Navbar"), href="#", className='padding-left'),
+            html.A(dbc.NavbarBrand("FordBot", style={'margin-left': '8%'}), href="#"),
             dbc.NavbarToggler(id="navbar-toggler"),
             dbc.Collapse(
                 dbc.Nav(
                     [
-                        dbc.NavItem(dbc.NavLink("Home", active=True, href="/teste")),
+                        dbc.NavItem(dbc.NavLink("Home", active=True, href="/")),
                         dbc.NavItem(dbc.NavLink("Features", href="#")),
                         dbc.NavItem(dbc.NavLink("Pricing", href="#")),
                         dbc.NavItem(dbc.NavLink("About", href="#")),
