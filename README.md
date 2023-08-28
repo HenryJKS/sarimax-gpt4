@@ -23,3 +23,8 @@
 * Atualizando o InputDash
 * Melhorando interatividade com chatGPT
 * Criando modelo do banco
+
+# Atualização 28/08
+
+* Atualizando Layout
+* Criando Pages

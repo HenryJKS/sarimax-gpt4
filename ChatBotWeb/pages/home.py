@@ -25,7 +25,7 @@ layout = html.Div([
 
             html.Div([
                 html.P("Gráfico de Linhas com suporte ao FordBot", className='p-card'),
-                
+
             ], className='box-card', style={'display': 'flex', 'flex-direction': 'row', 'height': '25%'}),
 
             html.Div([
