@@ -24,20 +24,20 @@ layout = html.Div([
         html.Div([
 
             html.Div([
-                html.P("Gráfico de Linhas com suporte ao FordBot", className='p-card'),
+                html.P("Gráfico1", className='p-card'),
 
             ], className='box-card', style={'display': 'flex', 'flex-direction': 'row', 'height': '25%'}),
 
             html.Div([
-                html.P("Gráfico de Linhas com suporte ao FordBot", className='p-card')
+                html.P("Gráfico2", className='p-card')
             ], className='box-card', style={'display': 'flex', 'flex-direction': 'row-reverse', 'height': '25%'}),
 
             html.Div([
-                html.P("Gráfico de Linhas com suporte ao FordBot", className='p-card')
+                html.P("Envio de email", className='p-card')
             ], className='box-card', style={'display': 'flex', 'flex-direction': 'row', 'height': '25%'}),
 
             html.Div([
-                html.P("Gráfico de Linhas com suporte ao FordBot", className='p-card')
+                html.P("Conheça o FordBot", className='p-card')
             ], className='box-card', style={'display': 'flex', 'flex-direction': 'row-reverse', 'height': '25%'}),
 
         ], style={'display': 'flex', 'flex-direction': 'column'}),
