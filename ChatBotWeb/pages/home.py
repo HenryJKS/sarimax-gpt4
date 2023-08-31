@@ -16,7 +16,7 @@ layout = html.Div([
     dbc.Container([
         dbc.Col([
             html.Div([
-                html.H1("Home", className='text-center mt-2'),
+                html.H2("Home", className='text-center mt-2'),
                 html.Hr(style={'color': 'black'}),
             ]),
         ]),

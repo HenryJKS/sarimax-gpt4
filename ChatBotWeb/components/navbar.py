@@ -39,8 +39,9 @@ def create_navbar():
             #     className="form-inline d-flex",
             # ),
         ],
-        color="primary",
+        color="#103D82",
         dark=True,
         expand="lg",
+        style={"height": "80px"}
     )
     return navbar

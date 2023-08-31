@@ -1,10 +1,13 @@
-
 import plotly.express as px
-from dash import Dash, dcc, html, callback, State, Input, Output
+from dash import dcc, html, callback, State, Input, Output
 import dash_bootstrap_components as dbc
 import dash
 from ChatBotWeb.chatAPI.ModelAPI import chat
 from ChatBotWeb.components import navbar
+from ChatBotWeb.query.queryFaturamento import df
+
+data = df
+data['Ano'] = data['Ano'].astype(str)
 
 NAVBAR = navbar.create_navbar()
 
@@ -16,109 +19,84 @@ dash.register_page(
     external_stylesheets=[dbc.themes.LITERA]
 )
 
-
 layout = dbc.Container([
+
+    html.Link(rel="stylesheet", href="ChatBotWeb/assets/style.css"),
 
     dbc.Row([
         NAVBAR
     ]),
 
     html.Div([
-        html.H1("Graphs", className='text-center mt-2'),
+        html.H2("Faturamento por Ano", className='text-center mt-2'),
     ]),
 
     html.Hr(),
 
     html.Div([
-        dcc.Input(id='x-values', type='text', placeholder='Valores de X', ),
-    ]),
+        dbc.Button(
+            "Fordbot",
+            id="horizontal-collapse-button",
+            color="primary",
+            n_clicks=0,
+            style={}
+        ),
+    ], className='mb-2'),
+    html.Div(
+        dbc.Collapse(
+            dbc.Card(
+                dbc.CardBody(
+                    html.Div([
+                        html.H6('Análise Gráfica: '),
+                        dbc.InputGroup([
+                            dbc.Input(id='question', type='text', placeholder='Pergunte ao Bot'),
+                            dbc.Button('Enviar', id='send-response', className='btn btn-primary btn-sm')
+                        ], className='mb-2'),
+
+                        html.Div(id='resposta')
+                    ], style={'width': '100%'}),
+                ),
+                className='background-1',
+                style={"width": "400px"},
+            ),
+            id="horizontal-collapse",
+            is_open=True,
+            dimension="width",
+            style={}
+        ),
+        className='mb-4',
+        style={"minHeight": "100px"},
+    ),
 
     html.Div([
-        dcc.Input(id='y-values', type='text', placeholder='Valores de Y', ),
-    ], className='mt-2'),
+        dcc.Graph(
+            figure=px.bar(data, x='Ano', y='Faturamento', color='Faturamento', barmode='group', ), id='graph')
+    ], className="justify-content-center", style={'width': '80%', 'margin': 'auto'}),
 
-    html.Div([
-        html.Button('Plotar Gráfico', id='submit-button',
-                    className='btn btn-outline-primary')
-    ], className='mt-2 mb-2'),
-
-    html.Div([
-        dcc.Graph(id='graph', className='mb-2'),
-    ], className="justify-content-center", style={'width': '60%', 'margin': 'auto'}),
-
-    html.Div([
-        html.H6('Análise Gráfica: ')
-    ]),
-
-    html.Div([
-    ], id='valores'),
-
-    html.Div([
-        dcc.Input(id='question', type='text', placeholder='Digite uma dúvida: '),
-        html.Button('Enviar', id='send-response', className='btn btn-outline-primary'),
-        html.Div(id='resposta')
-    ], style={'width': '50%'}),
-
-    dcc.Store(id='shared-data', data=None)
-
+    # html.Div([
+    # ], id='valores'),
 ], fluid=True, style={'background-color': 'rgb(233,243,240)', 'height': '100%'})
+
+
 @callback(
-    Output('shared-data', 'data'),
-    Output('graph', 'figure'),
-    Output('valores', 'children'),
-    Input('submit-button', 'n_clicks'),
-    State('x-values', 'value'),
-    State('y-values', 'value')
+    Output("horizontal-collapse", "is_open"),
+    [Input("horizontal-collapse-button", "n_clicks")],
+    [State("horizontal-collapse", "is_open")],
 )
-def create_graph_stored_data(n_clicks, x_values_str, y_values_str):
-    if not n_clicks:
-        return dash.no_update, dash.no_update, dash.no_update
-
-    # Separa os valores
-    x_values = x_values_str.split(',')
-    y_values = y_values_str.split(',')
-
-    # Verifica se o botão foi clicado
-    # Tratando erros
-    if x_values_str is None or y_values_str is None:
-        return dash.no_update
-    elif len(x_values) != len(y_values):
-        return dash.no_update
-    elif len(x_values) == 0 or len(y_values) == 0:
-        return dash.no_update
-
-    # Verifica se os valores são números
-    try:
-        x_values = [float(x) for x in x_values]
-        y_values = [float(y) for y in y_values]
-    except ValueError:
-        return dash.no_update
-
-    # Gerando grafico
-    fig = px.line(x=x_values, y=y_values, title='Line Graph')
-
-    frase = chat('Eixo x:' + str(x_values) + 'Eixo y:' + str(y_values))
-
-    # Retornando para os Outputs
-    return {'x_values': x_values, 'y_values': y_values, 'frase': frase}, fig, html.P(frase, className='font-weight-light')
+def toggle_collapse(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
 
 @callback(
     Output('resposta', 'children'),
     Input('send-response', 'n_clicks'),
     State('question', 'value'),
-    State('shared-data', 'data')
 )
-def create_response(n_clicks, question, shared_data):
+def create_response(n_clicks, question):
     if not n_clicks:
         return dash.no_update
-
-    if shared_data is None:
-        return dash.no_update
-
-    #Get dos dados
-    x = shared_data.get('x_values')
-    y = shared_data.get('y_values')
 
     # Verifica se o botão foi clicado
     # Tratando erros
@@ -126,7 +104,9 @@ def create_response(n_clicks, question, shared_data):
         return dash.no_update
 
     # Gerando resposta
-    resposta = chat(str(x) + str(y) + str(question))
+    resposta = chat('Ano: ' + str(data['Ano']) + 'Faturamento: ' + str(data['Faturamento']) + str(question))
 
     # Retornando para os Outputs
-    return html.P(resposta, className='font-weight-light')
+    return html.Div([
+        html.P(resposta, className='font-weight-light')
+    ], className='text-center border border-dark rounded'),

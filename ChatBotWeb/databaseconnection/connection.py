@@ -1,31 +1,27 @@
-import psycopg2
 import pandas as pd
+import mysql.connector as mysql
 
-# Connect to the database
-db_params = {
-    'dbname': 'challenge',
-    'user': 'postgres',
-    'password': 'admin',
-    'host': 'localhost',
-    'port': '5432'
-}
 
-connection = psycopg2.connect(**db_params)
+def mysql_query(query):
+    db_params = {
+        'database': 'challenge',
+        'user': 'root',
+        'password': 'admin',
+        'host': 'localhost',
+    }
 
-cursor = connection.cursor()
+    connection = mysql.connect(**db_params)
+    cursor = connection.cursor()
 
-cursor.execute('''SELECT v.modelo, VD.VEICULO_VENDIDO AS VENDAS
-    FROM veiculos v
-    JOIN vendas vd ON v.id_veiculo = vd.veiculos_id_veiculo
-	ORDER BY 2 DESC''')
+    cursor.execute(query)
 
-result = cursor.fetchall()
+    result = cursor.fetchall()
 
-column_names = [desc[0] for desc in cursor.description]
+    column_names = [desc[0] for desc in cursor.description]
 
-df = pd.DataFrame(result, columns=column_names, index=None)
+    df = pd.DataFrame(result, columns=column_names, index=None)
 
-cursor.close()
-connection.close()
+    cursor.close()
+    connection.close()
 
-print(df)
+    return df

@@ -1,3 +1,43 @@
+-- Tabela cliente
+CREATE TABLE cliente (
+    id_cliente SERIAL PRIMARY KEY,
+    nome_cliente VARCHAR(100) NOT NULL,
+    idade INTEGER NOT NULL,
+    cpf VARCHAR(14) NOT NULL
+);
+
+-- Tabela funcionario
+CREATE TABLE funcionario (
+    id_funcionario SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
+    salario NUMERIC(10, 2) NOT NULL
+);
+
+-- Tabela veiculo
+CREATE TABLE veiculo (
+    id_veiculo SERIAL PRIMARY KEY,
+    modelo VARCHAR(100) NOT NULL,
+    estoque INTEGER NOT NULL
+);
+
+-- Tabela vendas
+CREATE TABLE vendas (
+    id_venda SERIAL PRIMARY KEY,
+    data_venda DATE NOT NULL,
+    valor_venda NUMERIC(10, 2) NOT NULL,
+    id_veiculo INTEGER REFERENCES veiculo(id_veiculo)
+);
+
+-- Tabela veiculo_problema
+CREATE TABLE veiculo_problema (
+    id_problema SERIAL PRIMARY KEY,
+    tipo_problema VARCHAR(200) NOT NULL,
+    id_veiculo INTEGER REFERENCES veiculo(id_veiculo)
+);
+
+
+
 INSERT INTO cliente (nome_cliente, idade, cpf) VALUES
     ('Ana Silva', 28, '111.222.333-44'),
     ('João Santos', 35, '555.666.777-88'),
@@ -65,7 +105,21 @@ INSERT INTO vendas (data_venda, valor_venda, id_veiculo) VALUES
     ('2023-08-27', 23000.00, 6),
     ('2023-08-28', 21000.00, 8),
     ('2023-08-29', 45000.00, 7),
-    ('2023-08-30', 50000.00, 10);
+    ('2023-08-30', 50000.00, 10),
+    ('2022-08-18', 21000.00, 5),
+    ('2022-08-19', 45000.00, 5),
+    ('2022-08-20', 50000.00, 10),
+    ('2022-08-21', 22000.00, 1),
+    ('2022-08-22', 18000.00, 5),
+    ('2022-08-23', 32000.00, 3),
+    ('2022-08-24', 25000.00, 6),
+    ('2022-08-25', 28000.00, 5),
+    ('2022-08-26', 20000.00, 6),
+    ('2022-08-27', 23000.00, 6),
+    ('2022-08-28', 21000.00, 8),
+    ('2022-08-29', 45000.00, 7),
+    ('2022-08-30', 50000.00, 10);
+
 
 
 	INSERT INTO veiculo_problema (tipo_problema, id_veiculo) VALUES
@@ -102,5 +156,34 @@ INSERT INTO faturamento (data_faturamento, valor_faturamento) VALUES
     ('2023-04-12', 180000.00),
     ('2023-04-13', 220000.00),
     ('2023-03-14', 120000.00),
-    ('2023-02-15', 250000.00);
+    ('2023-02-15', 250000.00),
+    ('2022-08-01', 150000.00),
+    ('2022-08-02', 180000.00),
+    ('2022-07-03', 220000.00),
+    ('2022-07-04', 120000.00),
+    ('2022-07-05', 250000.00),
+    ('2022-06-06', 190000.00),
+    ('2022-06-07', 170000.00),
+    ('2022-06-08', 210000.00),
+    ('2022-06-09', 280000.00),
+    ('2022-05-10', 320000.00),
+    ('2022-05-11', 150000.00),
+    ('2022-04-12', 180000.00),
+    ('2022-04-13', 220000.00),
+    ('2022-03-14', 120000.00),
+    ('2022-02-15', 250000.00),
+    ('2021-08-01', 150000.00),
+    ('2021-08-02', 180000.00),
+    ('2021-07-03', 220000.00),
+    ('2021-07-04', 120000.00),
+    ('2021-07-05', 250000.00),
+    ('2021-06-06', 190000.00),
+    ('2021-06-07', 170000.00),
+    ('2021-06-08', 210000.00),
+    ('2021-05-09', 280000.00),
+    ('2021-04-10', 320000.00),
+    ('2021-03-11', 150000.00),
+    ('2021-02-12', 180000.00),
+    ('2021-01-13', 220000.00);
+
 

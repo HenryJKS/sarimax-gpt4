@@ -28,3 +28,10 @@
 
 * Atualizando Layout
 * Criando Pages
+
+# Atualização 31/08
+
+* Atulizando Layout
+* Melhorando interatividade com chatGPT
+* Criando modelo do banco
+* Criando conteudo na pagina
