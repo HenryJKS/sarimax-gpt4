@@ -16,12 +16,10 @@ dash.register_page(
     name='Dashboard',
     top_navbar=True,
     path='/graph1',
-    external_stylesheets=[dbc.themes.LITERA]
+    external_stylesheets=['assets/graph1.css'],
 )
 
 layout = dbc.Container([
-
-    html.Link(rel="stylesheet", href="ChatBotWeb/assets/style.css"),
 
     dbc.Row([
         NAVBAR
@@ -75,7 +73,7 @@ layout = dbc.Container([
 
     # html.Div([
     # ], id='valores'),
-], fluid=True, style={'background-color': 'rgb(233,243,240)', 'height': '100%'})
+], fluid=True, style={'background-color': '#e8f5ff', 'height': '100%'})
 
 
 @callback(

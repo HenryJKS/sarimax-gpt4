@@ -18,7 +18,7 @@ layout = dbc.Container([
         NAVBAR
     ]),
 
-    html.Link(rel="stylesheet", href="ChatBotWeb/assets/layout1.css"),
+    html.Link(rel="stylesheet", href="ChatBotWeb/assets/fordbot.css"),
 
     html.Div([
         html.Main(className="page-container", children=[

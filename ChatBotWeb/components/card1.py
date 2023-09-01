@@ -13,7 +13,7 @@ def card1():
                         "Tenha acesso a gráficos de linhas com suporte ao chatbot.",
                         className="card-text",
                     ),
-                    dbc.Button("Graph 01", color="primary", href='/graph    1'),
+                    dbc.Button("Graph 01", color="primary", href='/graph1'),
                 ]
             ),
         ],

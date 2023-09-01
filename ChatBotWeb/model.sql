@@ -1,39 +1,47 @@
 -- Tabela cliente
 CREATE TABLE cliente (
-    id_cliente SERIAL PRIMARY KEY,
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
     nome_cliente VARCHAR(100) NOT NULL,
-    idade INTEGER NOT NULL,
+    idade INT NOT NULL,
     cpf VARCHAR(14) NOT NULL
 );
 
 -- Tabela funcionario
 CREATE TABLE funcionario (
-    id_funcionario SERIAL PRIMARY KEY,
+    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     cargo VARCHAR(50) NOT NULL,
-    salario NUMERIC(10, 2) NOT NULL
+    salario DECIMAL(10, 2) NOT NULL
 );
 
 -- Tabela veiculo
 CREATE TABLE veiculo (
-    id_veiculo SERIAL PRIMARY KEY,
+    id_veiculo INT AUTO_INCREMENT PRIMARY KEY,
     modelo VARCHAR(100) NOT NULL,
-    estoque INTEGER NOT NULL
+    estoque INT NOT NULL
 );
 
 -- Tabela vendas
 CREATE TABLE vendas (
-    id_venda SERIAL PRIMARY KEY,
+    id_venda INT AUTO_INCREMENT PRIMARY KEY,
     data_venda DATE NOT NULL,
-    valor_venda NUMERIC(10, 2) NOT NULL,
-    id_veiculo INTEGER REFERENCES veiculo(id_veiculo)
+    valor_venda DECIMAL(10, 2) NOT NULL,
+    id_veiculo INT,
+    FOREIGN KEY (id_veiculo) REFERENCES veiculo(id_veiculo)
 );
 
 -- Tabela veiculo_problema
 CREATE TABLE veiculo_problema (
-    id_problema SERIAL PRIMARY KEY,
+    id_problema INT AUTO_INCREMENT PRIMARY KEY,
     tipo_problema VARCHAR(200) NOT NULL,
-    id_veiculo INTEGER REFERENCES veiculo(id_veiculo)
+    id_veiculo INT,
+    FOREIGN KEY (id_veiculo) REFERENCES veiculo(id_veiculo)
+);
+
+CREATE TABLE faturamento (
+    id_faturamento INT AUTO_INCREMENT PRIMARY KEY,
+    data_faturamento DATE NOT NULL,
+    valor_faturamento FLOAT NOT NULL
 );
 
 
@@ -135,11 +143,6 @@ INSERT INTO vendas (data_venda, valor_venda, id_veiculo) VALUES
     ('Falha no sistema de ignição', 10);
 
 
-	CREATE TABLE faturamento (
-    id_faturamento SERIAL PRIMARY KEY,
-    data_faturamento DATE NOT NULL,
-    valor_faturamento FLOAT NOT NULL
-)
 
 INSERT INTO faturamento (data_faturamento, valor_faturamento) VALUES
     ('2023-08-01', 150000.00),
@@ -172,6 +175,18 @@ INSERT INTO faturamento (data_faturamento, valor_faturamento) VALUES
     ('2022-04-13', 220000.00),
     ('2022-03-14', 120000.00),
     ('2022-02-15', 250000.00),
+    ('2022-06-08', 210000.00),
+    ('2022-06-09', 280000.00),
+    ('2022-05-10', 320000.00),
+    ('2022-05-11', 150000.00),
+    ('2022-04-12', 180000.00),
+    ('2022-04-13', 220000.00),
+    ('2022-03-14', 120000.00),
+    ('2022-02-15', 250000.00),
+    ('2022-01-15', 250000.00),
+    ('2022-01-15', 250000.00),
+    ('2022-01-15', 250000.00),
+    ('2022-01-15', 250000.00),
     ('2021-08-01', 150000.00),
     ('2021-08-02', 180000.00),
     ('2021-07-03', 220000.00),
@@ -184,6 +199,13 @@ INSERT INTO faturamento (data_faturamento, valor_faturamento) VALUES
     ('2021-04-10', 320000.00),
     ('2021-03-11', 150000.00),
     ('2021-02-12', 180000.00),
-    ('2021-01-13', 220000.00);
+    ('2020-01-13', 220000.00),
+    ('2020-06-06', 190000.00),
+    ('2020-06-07', 170000.00),
+    ('2020-06-08', 210000.00),
+    ('2020-05-09', 280000.00),
+    ('2020-04-10', 320000.00),
+    ('2020-03-11', 150000.00),
+    ('2020-02-12', 1800000.00),;
 
 
