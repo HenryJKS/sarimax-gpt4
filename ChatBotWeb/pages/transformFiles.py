@@ -1,8 +1,9 @@
+import base64
 import dash
-
 from ChatBotWeb.components import navbar
 from dash import html, dcc, callback, Input, Output
 import dash_bootstrap_components as dbc
+from ChatBotWeb.components import navbar
 
 NAVBAR = navbar.create_navbar()
 
@@ -15,7 +16,14 @@ dash.register_page(
 )
 
 layout = html.Div([
-    html.H1("Página de Transformação de Arquivos"),
+
+    html.Div([
+        NAVBAR
+    ]),
+
+    html.Div([
+        html.H1("Página de Transformação de Arquivos"),
+    ]),
 
     dcc.Upload(
         id='upload-data',

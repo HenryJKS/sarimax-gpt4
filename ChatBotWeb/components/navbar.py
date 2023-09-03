@@ -12,17 +12,17 @@ def create_navbar():
                     [
                         dbc.NavItem(dbc.NavLink("Home", active=True, href="/")),
                         dbc.NavItem(dbc.NavLink("Graph", href="/graph1")),
-                        dbc.NavItem(dbc.NavLink("Pricing", href="#")),
-                        dbc.NavItem(dbc.NavLink("About", href="#")),
+                        dbc.NavItem(dbc.NavLink("Graph2", href="/graph2")),
+                        dbc.NavItem(dbc.NavLink("Graph3", href="/graph3")),
                         dbc.DropdownMenu(
                             [
-                                dbc.DropdownMenuItem("Action", href="#"),
-                                dbc.DropdownMenuItem("Another action", href="#"),
+                                dbc.DropdownMenuItem("Enviar Email", href="/sendEmail"),
+                                dbc.DropdownMenuItem("Transformar Arquivo", href="/transform"),
                                 dbc.DropdownMenuItem("Something else here", href="#"),
                                 dbc.DropdownMenuItem(divider=True),
                                 dbc.DropdownMenuItem("Separated link", href="#"),
                             ],
-                            label="Dropdown",
+                            label="Opções",
                             nav=True,
                         ),
                     ],
