@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
 import base64
-import datetime
 import pandas as pd
 import io
 from dash import dcc, html, Input, Output, callback, dash_table, State
@@ -8,6 +6,7 @@ import dash
 import dash_bootstrap_components as dbc
 from ChatBotWeb.chatAPI.ModelAPI import chat
 from ChatBotWeb.components import navbar
+import openpyxl
 
 dataframe_gpt = None
 
@@ -79,7 +78,7 @@ layout = dbc.Container([
                 style={"width": "400px"},
             ),
             id="horizontal-collapse-export",
-            is_open=True,
+            is_open=False,
             dimension="width",
             style={}
         ),
@@ -130,11 +129,12 @@ def parse_contents(contents, filename, date):
                 'height': 'auto',
                 'overflowY': 'auto'
             },
-            page_size=10
+            page_size=10,
+            export_format='xlsx',
         ),
 
         html.Hr(),
-    ])
+    ], className='mt-2')
 
 
 @callback(
@@ -160,7 +160,7 @@ def create_response(n_clicks, question):
     # Verifica se o botão foi clicado
     # Tratando erros
     if question is None:
-        return dash.no_update
+        return html.P("Insira uma pergunta ")
 
     # Gerando resposta
     resposta = chat('dados: ' + str(dataframe_gpt) + str(question))

@@ -35,3 +35,9 @@
 * Melhorando interatividade com chatGPT
 * Criando modelo do banco
 * Criando conteudo na pagina
+
+# Atualização 03/09
+
+* Criando o dash2
+* Dash2 com possibilidade de leitura de arquivos externos
+* GPT responde de acordo com os dados dos arquivos

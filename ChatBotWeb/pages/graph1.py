@@ -99,7 +99,7 @@ def create_response(n_clicks, question):
     # Verifica se o botão foi clicado
     # Tratando erros
     if question is None:
-        return dash.no_update
+        return html.P("Insira uma pergunta ")
 
     # Gerando resposta
     resposta = chat('Ano: ' + str(data['Ano']) + 'Faturamento: ' + str(data['Faturamento']) + str(question))

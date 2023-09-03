@@ -12,26 +12,26 @@ dash.register_page(
     path='/',
     name='Home',
     top_navbar=True,
-    external_stylesheets=['assets/fordbot.css'],)
+    external_stylesheets=['assets/fordbot.css'], )
 
-layout = html.Div([
+layout = dbc.Container([
 
-    html.Div([
+    dbc.Row([
         NAVBAR
     ]),
 
-    dbc.Container([
-        dbc.Col([
-            html.Div([
-                html.H2("Home", className='text-center mt-2'),
-                html.Hr(style={'color': 'black'}),
-            ]),
-        ]),
+    html.Div([
+        html.H2("Home", className='text-center mt-2'),
+    ]),
 
+    html.Div([
+        html.Hr(style={'color': 'black'}),
+    ]),
+
+    dbc.Container([
         html.Div([
             CAROUSEL
         ]),
     ]),
 
-
-])
+], fluid=True)

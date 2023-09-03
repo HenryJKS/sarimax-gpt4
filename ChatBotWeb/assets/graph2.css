@@ -1,0 +1,54 @@
+.export {
+     font-size: 0px;
+     color: black;
+     padding: 10px;
+     margin: 4px;
+     border-radius: 10px;
+     transition: background-color 0.3s;
+     font-family: 'Poppins-Bold';
+}
+
+.export:before {
+    content: 'Exportar para Excel';
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}
+
+.export {
+    color: #fff;
+    background-color: #103D82;
+    border-color: #17a2b8;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.export:hover {
+    transition: 0.3s;
+    background-color: black;
+}
+
+.dash-spreadsheet-menu {
+    width: 50%;
+    float: right
+}
+
+.dash-spreadsheet-menu div {
+    width: 100%;
+}
+
+.dash-spreadsheet-menu button {
+    float: right;
+}
