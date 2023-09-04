@@ -4,7 +4,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from config import MAIL_PASSWORD, MAIL
 
-
 # Configurando
 mail_server = 'smtp.gmail.com'
 mail_port = 465
@@ -25,7 +24,7 @@ def send_mail(recipient, message):
         print("Erro de autenticação: Nome de usuário ou senha inválidos.")
     except smtplib.SMTPException as e:
         print(
-        f"Erro ao enviar o e-mail: {e}")
+            f"Erro ao enviar o e-mail: {e}")
     except Exception as e:
         print(f"Erro inesperado: {e}")
 
@@ -45,7 +44,6 @@ greeting = """\
 Hello,
 I'm sending you a test email because I'm learning how to send email with Python!"""
 
-
 # Descrição da mensagem
 body = """\
 <html>
@@ -61,7 +59,5 @@ part2 = MIMEText(body, "html")
 
 message.attach(part1)
 message.attach(part2)
-
-
 
 send_mail(receiver_address, message.as_string())

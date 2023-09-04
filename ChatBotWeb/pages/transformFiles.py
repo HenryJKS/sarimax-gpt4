@@ -15,37 +15,46 @@ dash.register_page(
     external_stylesheets=[dbc.themes.LITERA]
 )
 
-layout = html.Div([
+layout = dbc.Container([
 
-    html.Div([
+    dbc.Row([
         NAVBAR
     ]),
 
     html.Div([
-        html.H1("Página de Transformação de Arquivos"),
+        html.H2("Página de Transformação de Arquivos", className='text-center mt-2'),
     ]),
 
-    dcc.Upload(
-        id='upload-data',
-        children=html.Div([
-            'Arraste e solte ou ',
-            html.A('selecione um arquivo')
-        ]),
-        multiple=False
-    ),
+    html.Hr(),
 
-    dcc.Dropdown(
-        id='transform-options',
-        options=[
-            {'label': 'Converter para letras maiúsculas', 'value': 'uppercase'}
-        ],
-        value='uppercase'
-    ),
+    html.Div([
+        dcc.Upload(
+            id='upload-data',
+            children=html.Div([
+                'Arraste ou Solte ou ',
+                html.A('Selecione o Arquivo')
+            ]),
+            multiple=False
+        ),
+    ], className='mt-2'),
 
-    html.Button('Aplicar Transformação', id='apply-button'),
+    html.Div([
+        dcc.Dropdown(
+            id='transform-options',
+            options=[
+                {'label': 'Converter para letras maiúsculas', 'value': 'uppercase'}
+            ],
+            value='uppercase'
+        ),
+    ], className='mt-2'),
+
+    html.Div([
+        html.Button('Aplicar Transformação', id='apply-button', className='btn btn-primary'),
+    ], className='mt-2'),
+
 
     html.Div(id='output-data')
-])
+], fluid=True, style={'background-color': '#e8f5ff', 'height': '100%'})
 
 
 def apply_transformation(contents, transformation):

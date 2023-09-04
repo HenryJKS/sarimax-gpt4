@@ -1,7 +1,7 @@
 import dash
 
 from ChatBotWeb.components import navbar
-from dash import html, dcc, callback, Input, Output
+from dash import html, dcc, callback, Input, Output, State
 import smtplib, ssl
 from email import encoders
 from email.mime.multipart import MIMEMultipart
@@ -32,28 +32,53 @@ layout = dbc.Container([
     html.Hr(),
 
     html.Div([
-        html.Label("Destinatário:"),
-        dcc.Input(id='receiver_address', type='email', placeholder='Digite o e-mail do destinatário'),
-        html.Label("Assunto:"),
-        dcc.Input(id='subject', type='text', placeholder='Digite o assunto'),
 
+        html.Div([
+            html.Label("Destinatário:", className=''),
+            dcc.Input(id='receiver_address', type='email', placeholder='E-mail do Destino', className=''),
+        ]),
+
+        html.Div([
+            html.Label("Assunto:"),
+            dcc.Input(id='subject', type='text', placeholder='Escreva o assunto'),
+        ], style={'margin-left': '15px'}),
+
+    ], className='flex-container', style={'display': 'flex', 'flex-direction': 'row', 'justify-content': 'flex-start'}),
+
+    html.Div([
         html.Div([
             html.Label("Mensagem:"),
         ]),
 
         dcc.Textarea(id='message', placeholder='Digite a mensagem', style={'width': '100%', 'height': 150}),
-        html.Label("Anexos:"),
+    ], className='mt-2'),
+
+    html.Div([
+        html.Div([
+
+        ], id='file-list'),
+    ], className='mb-2'),
+
+    html.Div([
         dcc.Upload(
             id='attachment-upload',
             children=html.Div([
                 'Arraste e Solte ou ',
                 html.A('Selecione um Arquivo')
             ]),
-            multiple=True
-        ),
-        html.Button('Enviar E-mail', id='enviar-button'),
+            multiple=True,
+            style={'width': '28%'}
+        )
+    ]),
+
+    html.Div([
+        html.Button('Enviar E-mail', id='enviar-button', className='btn btn-primary')
+    ], className='mt-2'),
+
+    html.Div([
         html.Div(id='resultado')
-    ])
+    ]),
+
 ], fluid=True, style={'background-color': '#e8f5ff', 'height': '100%'})
 
 
@@ -68,7 +93,7 @@ layout = dbc.Container([
 )
 def send_mail(n_clicks, receiver_address, subject, message, attachment_contents, attachment_filenames):
     if n_clicks is None:
-        return '';
+        return ''
 
     try:
         mail_server = 'smtp.gmail.com'
@@ -96,10 +121,18 @@ def send_mail(n_clicks, receiver_address, subject, message, attachment_contents,
         with smtplib.SMTP_SSL(mail_server, mail_port, context=context) as server:
             server.login(sender_address, sender_password)
             server.sendmail(sender_address, receiver_address, msg.as_string())
-        return html.Div("E-mail enviado com sucesso!", style={'color': 'green'})
+        return html.Div("E-mail Enviado com Sucesso!", className='text-success mt-2')
     except smtplib.SMTPAuthenticationError:
-        return html.Div("Erro de autenticação: Nome de usuário ou senha inválidos.", style={'color': 'red'})
+        return html.Div("Erro de autenticação: Nome de usuário ou senha inválidos.", className='text-danger mt-2')
     except smtplib.SMTPException as e:
-        return html.Div(f"Erro ao enviar o e-mail: {e}", style={'color': 'red'})
+        return html.Div(f"Erro ao enviar o e-mail: {e}", className='text-danger mt-2')
     except Exception as e:
-        return html.Div(f"Erro inesperado: {e}", style={'color': 'red'})
+        return html.Div(f"Erro inesperado: {e}", className='text-danger mt-2')
+
+
+@callback(Output('file-list', 'children'),
+          Input('attachment-upload', 'filename'))
+def update_output(attachment_filenames):
+    if attachment_filenames is None:
+        return html.Div('Nenhum Arquivo Anexado', className='text-info')
+    return html.Div(f'Arquivo Anexado(s): {attachment_filenames[:]}', className='text-success')
