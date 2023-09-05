@@ -8,7 +8,5 @@ app.layout = html.Div([
     dash.page_container
 ], style={'background-color': '#e8f5ff', 'height': '100vh'})
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)

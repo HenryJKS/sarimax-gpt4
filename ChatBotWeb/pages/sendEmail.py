@@ -35,7 +35,7 @@ layout = dbc.Container([
 
         html.Div([
             html.Label("Destinatário:", className=''),
-            dcc.Input(id='receiver_address', type='email', placeholder='E-mail do Destino', className=''),
+            dcc.Input(id='receiver_address', type='email', placeholder='E-Mail do Destino', className=''),
         ]),
 
         html.Div([
@@ -72,7 +72,7 @@ layout = dbc.Container([
     ]),
 
     html.Div([
-        html.Button('Enviar E-mail', id='enviar-button', className='btn btn-primary')
+        html.Button('Enviar E-Mail', id='enviar-button', className='btn btn-primary')
     ], className='mt-2'),
 
     html.Div([
