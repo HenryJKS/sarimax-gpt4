@@ -1,9 +1,11 @@
+import time
+
 import dash
 from dash import Dash, html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
 from ChatBotWeb.query.queryVeiculoProblema import df
-import plotly.express as px
+from ChatBotWeb.chatAPI.ModelAPI import chat
 
 NAVBAR = navbar.create_navbar()
 
@@ -43,19 +45,22 @@ layout = dbc.Container([
     ], className='mt-2'),
 
     html.Div([
-        dbc.Button("Open Offcanvas", id="open-offcanvas", n_clicks=0),
+        dbc.Button("FordBot", id="open-offcanvas", n_clicks=0),
         dbc.Offcanvas(
-            html.P(
-                "This is the content of the Offcanvas. "
-                "Close it by clicking on the close button, or "
-                "the backdrop."
-            ),
+            html.Div([
+                html.H4('Converse com o Bot', className='text-center'),
+                html.Hr(),
+                html.H6('Faça sua pergunta:', className='mt-2'),
+                dcc.Textarea(style={'width': '100%'}, id='question'),
+                html.Button('Perguntar', id='send-question', className='rounded'),
+                html.Div([
+                ], className='mt-4', id='response-problem')
+            ]),
             id="offcanvas",
-            title="Title",
             is_open=False,
-            
+            placement='end'
         ),
-    ], className='mt-2')
+    ], className='mt-2'),
 
 ], fluid=True)
 
@@ -92,6 +97,26 @@ def update_problemas_card(selected_modelo):
         dbc.CardHeader('Relatório do Modelo Selecionado'),
         dbc.CardBody([
             html.P(f'Modelo: {selected_modelo}'),
-            html.P(f'Problemas Atuais: {problemas_texto}')
+            html.P(f'Problemas Encontrados: {problemas_texto}')
         ])
     ])
+
+
+@callback(Output('response-problem', 'children'),
+          Input('send-question', 'n_clicks'),
+          State('question', 'value'))
+def response(n_clicks, question):
+    if not n_clicks:
+        return dash.no_update
+    elif n_clicks is None:
+        return dash.no_update
+
+    resposta = chat(f"dados: {df}, pergunta: {question}")
+
+    if question is None:
+        return (
+            html.P('Insira um pergunta', className='text-center border border-dark rounded', style={'padding': '2%'})
+        )
+    return (
+        html.P(resposta, className='text-center border border-dark rounded', style={'padding': '2%'})
+    )

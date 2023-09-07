@@ -1,3 +1,5 @@
+import time
+
 import plotly.express as px
 from dash import dcc, html, callback, State, Input, Output
 import dash_bootstrap_components as dbc
@@ -51,7 +53,8 @@ layout = dbc.Container([
                             dbc.Button('Enviar', id='send-response', className='btn btn-primary btn-sm')
                         ], className='mb-2'),
 
-                        html.Div(id='resposta')
+                        html.Div([
+                        ], id='resposta')
                     ], style={'width': '100%'}),
                 ),
                 className='background-1',
@@ -99,12 +102,15 @@ def create_response(n_clicks, question):
     # Verifica se o botão foi clicado
     # Tratando erros
     if question is None:
-        return html.P("Insira uma pergunta ")
+        return html.P("Insira uma pergunta", className='text-left border border-dark rounded',
+                      style={'padding': '10px'})
 
     # Gerando resposta
     resposta = chat('Ano: ' + str(data['Ano']) + 'Faturamento: ' + str(data['Faturamento']) + str(question))
 
     # Retornando para os Outputs
-    return html.Div([
-        html.P(resposta, className='font-weight-light')
-    ], className='text-center border border-dark rounded'),
+    return (
+        html.Div([
+            html.P(resposta, className='font-weight-light text-left border border-dark rounded',
+                   style={'padding': '10px'})
+        ]))
