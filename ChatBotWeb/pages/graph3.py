@@ -10,6 +10,8 @@ from Script.geradorRelatorio import create_pdf
 
 NAVBAR = navbar.create_navbar()
 
+chat_log = []
+
 pd.set_option('display.max_columns', None)
 
 dash.register_page(
@@ -69,45 +71,8 @@ layout = dbc.Container([
         dbc.Button("Gerar Relatório", id="gerar-relatorio-button", n_clicks=0),
         dcc.Download(id='download-pdf')
     ], className='mt-2'),
+
 ], fluid=True)
-
-
-def generate_report(n_clicks, selected_modelo):
-    if not n_clicks or selected_modelo is None:
-        return dash.no_update
-
-    # Filtra o DataFrame para o veículo selecionado
-    filtered_df = df[df['MODELO'] == selected_modelo]
-
-    # Nome do arquivo PDF a ser gerado
-    filename = f"relatorio_{selected_modelo}.pdf"
-
-    # Gera o relatório PDF
-    create_pdf(filtered_df, filename)
-
-    # Lê o arquivo PDF em bytes e converte-o para base64
-    with open(filename, "rb") as pdf_file:
-        pdf_data = pdf_file.read()
-        base64_pdf = base64.b64encode(pdf_data).decode()
-
-    # Retorna o conteúdo do arquivo PDF em base64 para o download
-    return base64_pdf
-
-
-@callback(
-    Output('download-pdf', 'data'),
-    Input('gerar-relatorio-button', 'n_clicks'),
-    State('modelo-dropdown', 'value'),
-)
-def download_pdf(n_clicks, selected_modelo):
-    if n_clicks and selected_modelo:
-        filtered_df = df[df['MODELO'] == selected_modelo]
-        filename = f"relatorio_{selected_modelo}.pdf"
-        create_pdf(filtered_df, filename)
-        with open(filename, "rb") as pdf_file:
-            pdf_data = pdf_file.read()
-            return dcc.send_bytes(pdf_data, filename=filename)
-    return None
 
 
 @callback(
@@ -162,6 +127,8 @@ def response(n_clicks, question):
 
     resposta = chat_analise_veiculo(f"dados: {df}, pergunta: {question}")
 
+    chat_log.append((question, resposta))
+
     # print(f"dados: {df}, pergunta: {question}")
 
     if question is None:
@@ -171,3 +138,28 @@ def response(n_clicks, question):
     return (
         html.P(resposta, className='text-center border border-dark rounded', style={'padding': '2%'})
     )
+
+
+@callback(
+    Output('download-pdf', 'data'),
+    Input('gerar-relatorio-button', 'n_clicks'),
+    State('modelo-dropdown', 'value'),
+    State('modelo-dropdown', 'options'),  # Selecione os dados apropriados aqui
+    prevent_initial_call=True
+)
+def download_pdf(n_clicks, selected_modelo, selected_options):
+    if n_clicks and selected_modelo:
+        filtered_df = df[df['MODELO'] == selected_modelo]
+        selected_data = [f"{option['label']}: {option['value']}" for option in selected_options]
+        filename = f"pdf\\relatorio_{selected_modelo}.pdf"
+        create_pdf(filtered_df, filename, chat_log, selected_data)  # Passe os dados selecionados
+        with open(filename, "rb") as pdf_file:
+            pdf_data = pdf_file.read()
+            return dcc.send_bytes(pdf_data, filename=filename)
+    return None
+
+
+
+
+
+
