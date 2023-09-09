@@ -45,7 +45,6 @@ def create_pdf(dataframe, filename, chat_log, selected_data):
     table.setStyle(style)
     elements.append(table)
 
-    # Adicione os dados selecionados como texto ao PDF
     # elements.append(Paragraph("Dados Selecionados:", styles['Normal']))
     # for entry in selected_data:
     #     elements.append(Paragraph(entry, styles['Normal']))
@@ -68,11 +67,3 @@ def create_pdf(dataframe, filename, chat_log, selected_data):
         f.write(buffer.getvalue())
 
 
-# Exemplo de uso
-data = {'Coluna1': [1, 2, 3], 'Coluna2': ['A', 'B', 'C']}
-df = pd.DataFrame(data)
-
-chat_log = [("Pergunta 1", "Resposta 1"), ("Pergunta 2", "Resposta 2")]
-selected_data = ["Dado 1: Valor 1", "Dado 2: Valor 2"]
-
-create_pdf(df, 'relatorio.pdf', chat_log, selected_data)

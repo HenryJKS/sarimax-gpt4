@@ -1,5 +1,5 @@
 import dash
-
+import base64
 from ChatBotWeb.components import navbar
 from dash import html, dcc, callback, Input, Output, State
 import smtplib, ssl
@@ -106,17 +106,26 @@ def send_mail(n_clicks, receiver_address, subject, message, attachment_contents,
         msg["From"] = sender_address
         msg["To"] = receiver_address
 
+        if receiver_address is None:
+            return html.Div('Insira um email !', className='text-danger mt-2')
+
+        if subject is None:
+            return html.Div("Insira o assunto do envio", className='text-danger mt-2')
+
         msg.attach(MIMEText(message, 'plain'))
 
         context = ssl.create_default_context()
 
-        if attachment_contents and attachment_filenames:
+        if attachment_contents and attachment_filenames is not None:
             for content, filename in zip(attachment_contents, attachment_filenames):
-                attachment = MIMEBase('application', 'octet-stream')
-                attachment.set_payload(content)
-                encoders.encode_base64(attachment)
-                attachment.add_header('Content-Disposition', f'attachment; filename={filename}')
-                msg.attach(attachment)
+                if filename:  # Verifique se o nome do arquivo não é None
+                    # Adicione o arquivo como um anexo
+                    part = MIMEBase('application', 'octet-stream')
+                    file_content = content.split(',')[1]
+                    part.set_payload(base64.b64decode(file_content))
+                    encoders.encode_base64(part)
+                    part.add_header('Content-Disposition', f'attachment; filename="{filename}"')
+                    msg.attach(part)
 
         with smtplib.SMTP_SSL(mail_server, mail_port, context=context) as server:
             server.login(sender_address, sender_password)

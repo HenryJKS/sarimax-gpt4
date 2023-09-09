@@ -36,14 +36,22 @@ layout = dbc.Container([
     ]),
 
     html.Div([
-        html.P('Selecione o veículo: '),
-        dcc.Dropdown(
-            id='modelo-dropdown',
-            options=[{'label': modelo, 'value': modelo} for modelo in df['MODELO'].unique()],
-            value=df['MODELO'][0],
-            multi=False,
-        ),
-    ], style={'width': '25%'}),
+        html.Div([
+            html.P('Selecione o veículo: '),
+            dcc.Dropdown(
+                id='modelo-dropdown',
+                options=[{'label': modelo, 'value': modelo} for modelo in df['MODELO'].unique()],
+                value=df['MODELO'][0],
+                multi=False,
+            ),
+        ], style={'width': '25%'}),
+
+        html.Div([
+            dbc.Button("Gerar Relatório", id="gerar-relatorio-button", n_clicks=0),
+            dcc.Download(id='download-pdf')
+        ], style={'margin-top': '2.5%'}),
+
+    ], style={'display': 'flex', 'justify-content': 'space-between'}),
 
     html.Div([
         html.Div([], id='problemas-card')
@@ -65,11 +73,6 @@ layout = dbc.Container([
             is_open=False,
             placement='end'
         ),
-    ], className='mt-2'),
-
-    html.Div([
-        dbc.Button("Gerar Relatório", id="gerar-relatorio-button", n_clicks=0),
-        dcc.Download(id='download-pdf')
     ], className='mt-2'),
 
 ], fluid=True)

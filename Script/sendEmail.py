@@ -9,7 +9,7 @@ mail_server = 'smtp.gmail.com'
 mail_port = 465
 sender_address = MAIL
 sender_password = MAIL_PASSWORD
-receiver_address = 'vitorandre6@gmail.com'
+receiver_address = 'henryjooji30@gmail.com'
 
 
 # Enviando email
