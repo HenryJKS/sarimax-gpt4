@@ -258,7 +258,10 @@ INSERT INTO Brasil (estado, cidade, latitude, longitude) VALUES
     ('Bahia', 'Vitória da Conquista', -14.8661, -40.8397),
 	('Rio Grande do Sul', 'Porto Alegre', -30.0346, -51.2177),
     ('Rio Grande do Sul', 'Caxias do Sul', -29.1658, -51.1794),
-    ('Rio Grande do Sul', 'Pelotas', -31.7662, -52.3213);
+    ('Rio Grande do Sul', 'Pelotas', -31.7662, -52.3213),
+    ('Mato Grosso', 'Cuiabá', -15.5989, -56.0949),
+    ('Mato Grosso', 'Várzea Grande', -15.6455, -56.1324),
+    ('Mato Grosso', 'Rondonópolis', -16.4671, -54.6377);
 
     INSERT INTO veiculos_ativos (modelo, placa, ID_BRASIL) VALUES
     ('Ford Focus', 'ABC1234', 1),
@@ -310,5 +313,15 @@ INSERT INTO Brasil (estado, cidade, latitude, longitude) VALUES
     ('Ford Ranger', 'EFG2345', 4),
     ('Ford F-150', 'HIJ6789', 1),
     ('Ford Super Duty', 'KLM0123', 1),
-    ('Ford Bronco', 'NOP4567', 1);
+    ('Ford Bronco', 'NOP4567', 1),
+    ('Ford Focus', 'ABC1234', 31),
+    ('Ford Fiesta', 'DEF5678', 31),
+    ('Ford Fusion', 'GHI9012', 32),
+    ('Ford Mustang', 'JKL3456', 32),
+    ('Ford Escape', 'MNO7890', 33),
+    ('Ford Explorer', 'PQR1234', 33),
+    ('Ford Edge', 'STU5678', 31),
+    ('Ford Ranger', 'VWX9012', 31),
+    ('Ford F-150', 'YZA3456', 32),
+    ('Ford EcoSport', 'BCD7890', 33);
 
