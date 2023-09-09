@@ -1,5 +1,4 @@
-import time
-
+import base64
 import dash
 import pandas as pd
 from dash import html, dcc, Output, Input, State, callback
@@ -7,6 +6,7 @@ import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
 from ChatBotWeb.query.queryVeiculoProblema import df
 from ChatBotWeb.chatAPI.ModelAPI import chat_analise_veiculo
+from Script.geradorRelatorio import create_pdf
 
 NAVBAR = navbar.create_navbar()
 
@@ -65,7 +65,49 @@ layout = dbc.Container([
         ),
     ], className='mt-2'),
 
+    html.Div([
+        dbc.Button("Gerar Relatório", id="gerar-relatorio-button", n_clicks=0),
+        dcc.Download(id='download-pdf')
+    ], className='mt-2'),
 ], fluid=True)
+
+
+def generate_report(n_clicks, selected_modelo):
+    if not n_clicks or selected_modelo is None:
+        return dash.no_update
+
+    # Filtra o DataFrame para o veículo selecionado
+    filtered_df = df[df['MODELO'] == selected_modelo]
+
+    # Nome do arquivo PDF a ser gerado
+    filename = f"relatorio_{selected_modelo}.pdf"
+
+    # Gera o relatório PDF
+    create_pdf(filtered_df, filename)
+
+    # Lê o arquivo PDF em bytes e converte-o para base64
+    with open(filename, "rb") as pdf_file:
+        pdf_data = pdf_file.read()
+        base64_pdf = base64.b64encode(pdf_data).decode()
+
+    # Retorna o conteúdo do arquivo PDF em base64 para o download
+    return base64_pdf
+
+
+@callback(
+    Output('download-pdf', 'data'),
+    Input('gerar-relatorio-button', 'n_clicks'),
+    State('modelo-dropdown', 'value'),
+)
+def download_pdf(n_clicks, selected_modelo):
+    if n_clicks and selected_modelo:
+        filtered_df = df[df['MODELO'] == selected_modelo]
+        filename = f"relatorio_{selected_modelo}.pdf"
+        create_pdf(filtered_df, filename)
+        with open(filename, "rb") as pdf_file:
+            pdf_data = pdf_file.read()
+            return dcc.send_bytes(pdf_data, filename=filename)
+    return None
 
 
 @callback(
