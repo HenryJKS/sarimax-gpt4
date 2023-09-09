@@ -58,6 +58,7 @@ def create_pdf(dataframe, filename, chat_log, selected_data):
         elements.append(Paragraph(f"Pergunta: {question}", styles['Normal']))
         elements.append(Spacer(1, 10))
         elements.append(Paragraph(f"Resposta: {answer}", styles['Normal']))
+        elements.append(Spacer(1, 30))
 
     # Construa o PDF
     doc.build(elements)
