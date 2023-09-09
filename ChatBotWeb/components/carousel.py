@@ -50,8 +50,8 @@ def tab_content(active_tab):
                 html.H4("Versatilidade", className='text-center mt-2'),
 
                 html.P('''Um dos pontos fortes é a versatilidade, pois o usuário 
-                pode escolher quais dados ele quer a análise, Onde o dados podem ser extraido 
-                através de um banco de dados, ou até mesmo de um arquivo .csv, .xlsx, .txt''',
+                pode escolher quais dados ele quer a análise, onde os dados podem ser extraido 
+                através de um banco de dados, ou até mesmo de um arquivo .csv, .xlsx''',
                        className='text-center')
 
             ], style={'width': '50%', 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center'}),

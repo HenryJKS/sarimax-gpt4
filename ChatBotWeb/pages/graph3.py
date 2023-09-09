@@ -1,13 +1,16 @@
 import time
 
 import dash
-from dash import Dash, html, dcc, Output, Input, State, callback
+import pandas as pd
+from dash import html, dcc, Output, Input, State, callback
 import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
 from ChatBotWeb.query.queryVeiculoProblema import df
-from ChatBotWeb.chatAPI.ModelAPI import chat
+from ChatBotWeb.chatAPI.ModelAPI import chat_analise_veiculo
 
 NAVBAR = navbar.create_navbar()
+
+pd.set_option('display.max_columns', None)
 
 dash.register_page(
     __name__,
@@ -52,7 +55,7 @@ layout = dbc.Container([
                 html.Hr(),
                 html.H6('Faça sua pergunta:', className='mt-2'),
                 dcc.Textarea(style={'width': '100%'}, id='question'),
-                html.Button('Perguntar', id='send-question', className='rounded'),
+                html.Button('Perguntar', id='send-question', className='btn btn-secondary'),
                 html.Div([
                 ], className='mt-4', id='response-problem')
             ]),
@@ -84,20 +87,24 @@ def update_problemas_card(selected_modelo):
     if selected_modelo is None:
         return ''
 
-    # Filtra o DataFrame para obter os problemas do modelo selecionado
     problemas_modelo = df[df['MODELO'] == selected_modelo]['PROBLEMA'].unique()
 
-    # Converte os problemas do modelo em uma lista
+    cliente = df[df['MODELO'] == selected_modelo]['CLIENTE'].unique()
+
+    km_rodado = df[df['MODELO'] == selected_modelo]['KM'].unique()
+
     problemas_lista = problemas_modelo.tolist()
 
     # Cria uma string com os problemas separados por vírgula
     problemas_texto = ', '.join(problemas_lista)
 
     return dbc.Card([
-        dbc.CardHeader('Relatório do Modelo Selecionado'),
+        dbc.CardHeader('Relatório do Modelo'),
         dbc.CardBody([
             html.P(f'Modelo: {selected_modelo}'),
-            html.P(f'Problemas Encontrados: {problemas_texto}')
+            html.P(f'Problemas Encontrados: {problemas_texto}'),
+            html.P(f'Cliente: {cliente[0]}'),
+            html.P(f'Quilometragem: {km_rodado[0]}km')
         ])
     ])
 
@@ -111,7 +118,9 @@ def response(n_clicks, question):
     elif n_clicks is None:
         return dash.no_update
 
-    resposta = chat(f"dados: {df}, pergunta: {question}")
+    resposta = chat_analise_veiculo(f"dados: {df}, pergunta: {question}")
+
+    # print(f"dados: {df}, pergunta: {question}")
 
     if question is None:
         return (

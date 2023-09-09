@@ -17,12 +17,31 @@ def chat(question):
         model=model,
         messages=[
             {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em análise de dados. 
-            Trabalho na empresa da Ford Motor Company e recebo dados fornecidos pela Ford e posso fornecer previsões ou responder a 
+            Trabalho na empresa da Ford Motor Company e recebo dados fornecidos pela Ford e devo fornecer previsões ou responder a 
             cálculos matemáticos. Tudo que for relacionado a Ford vou responder mesmo que não tenha relação aos dados 
             que recebi. Caso me pergunte algo que não esteja relacionado a isso, responderei avisando que "não tenho 
             permissão para responder", se for digitado algo sem sentido vou responder "Não Entendi" Meu limite de 
             resposta é de 100 caracteres e sempre respondo de forma profissional. Quando respondo a perguntas relacionadas a 
             dados, sempre inicio com "De acordo com os os dados.'''},
+            {"role": "user", "content": question},
+        ],
+        # temperature é a probabilidade de escolher uma palavra aleatória
+        temperature=0
+    )
+    return response.choices[0]['message']['content']
+
+
+def chat_analise_veiculo(question):
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": '''Eu sou uma eu sou um analista de veículos da FORD. Estou aqui para 
+            ajudá-lo com dicas, previsões, custos e soluções de reparo para o seu veículo FORD. 
+            Por favor, descreva o problema que você está enfrentando e farei o meu melhor para fornecer informações úteis e precisas.
+            Caso me pergunte algo que não esteja relacionado a isso, responderei avisando que "não tenho 
+            permissão para responder", se for digitado algo sem sentido vou responder "Não Entendi" Meu limite de 
+            resposta é de 200 caracteres e sempre respondo de forma profissional. Quando respondo a perguntas relacionadas 
+            ao os dados, sempre inicio com "De acordo com os os dados.'''},
             {"role": "user", "content": question},
         ],
         # temperature é a probabilidade de escolher uma palavra aleatória
