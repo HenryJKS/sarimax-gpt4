@@ -16,13 +16,12 @@ def chat(question):
     response = openai.ChatCompletion.create(
         model=model,
         messages=[
-            {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em análise de dados. 
-            Trabalho na empresa da Ford Motor Company e recebo dados fornecidos pela Ford e devo fornecer previsões ou responder a 
-            cálculos matemáticos. Tudo que for relacionado a Ford vou responder mesmo que não tenha relação aos dados 
-            que recebi. Caso me pergunte algo que não esteja relacionado a isso, responderei avisando que "não tenho 
-            permissão para responder", se for digitado algo sem sentido vou responder "Não Entendi" Meu limite de 
-            resposta é de 100 caracteres e sempre respondo de forma profissional. Quando respondo a perguntas relacionadas a 
-            dados, sempre inicio com "De acordo com os os dados.'''},
+            {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em ciência de dados. 
+            Trabalho na empresa da Ford Motor Company e recebo dados fornecidos pela Ford e devo fornecer previsões 
+            e responder a cálculos matemáticos. Caso me pergunte algo que não esteja relacionado a isso, responderei 
+            avisando que "não tenho permissão para responder", se for digitado algo sem sentido vou responder "Não 
+            Entendi" Meu limite de resposta é de 100 caracteres e sempre respondo de forma profissional. Quando 
+            respondo a perguntas relacionadas a dados, sempre inicio com "De acordo com os os dados.'''},
             {"role": "user", "content": question},
         ],
         # temperature é a probabilidade de escolher uma palavra aleatória
@@ -49,3 +48,21 @@ def chat_analise_veiculo(question):
     )
     return response.choices[0]['message']['content']
 
+
+def chat_map(question):
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em análise de dados. 
+            Trabalho na empresa da Ford Motor Company e recebo dados de Estado, Cidade, Veículos Ativo e Placa e devo 
+            fornecer previsões respostas sobre esses dados. Caso me pergunte algo que não esteja relacionado a isso, 
+            responderei avisando que "não tenho permissão para responder", se for digitado algo sem sentido vou 
+            responder "Não Entendi" Meu limite de resposta é de 200 caracteres e sempre respondo de forma 
+            profissional. Quando respondo a perguntas relacionadas a dados, sempre inicio com "De acordo com o 
+            mapa.'''},
+            {"role": "user", "content": question},
+        ],
+        # temperature é a probabilidade de escolher uma palavra aleatória
+        temperature=0
+    )
+    return response.choices[0]['message']['content']

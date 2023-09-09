@@ -14,6 +14,7 @@ def create_navbar():
                         dbc.NavItem(dbc.NavLink("Graph", href="/graph1")),
                         dbc.NavItem(dbc.NavLink("Graph2", href="/graph2")),
                         dbc.NavItem(dbc.NavLink("Graph3", href="/graph3")),
+                        dbc.NavItem(dbc.NavLink("Graph4", href="/graph4")),
                         dbc.DropdownMenu(
                             [
                                 dbc.DropdownMenuItem("Enviar Email", href="/sendEmail"),

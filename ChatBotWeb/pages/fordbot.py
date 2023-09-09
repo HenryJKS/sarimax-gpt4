@@ -31,16 +31,15 @@ layout = dbc.Container([
                 "garantirá uma resposta assertiva.",
             ]),
             html.P(children=[
-                "A tecnologia usada é a engine GPT 4.0 com o API da OpenAI.",
+                "Tecnologia: A tecnologia usada é a engine GPT 4.0 com o API da OpenAI.",
             ]),
             html.P(children=[
                 "Propósito: Um dos motivos pela invenção é trazer agilidade e praticidade para o usuário, onde ele "
                 "possa tomar decisões mais rápidas e assertivas."
             ]),
             html.P(children=[
-                "Limitações: O FordBot só é treinado para responder perguntas relacionado aos dados recebidos pelo "
-                "gráfico."
+                "Limitações: O FordBot só é treinado para responder perguntas relacionado aos dados recebidos pela FORD"
             ]),
-        ])
+        ], style={'align-items': 'center', 'justify-content': 'center'})
     ])
-], fluid=True, className='')
+], fluid=True)

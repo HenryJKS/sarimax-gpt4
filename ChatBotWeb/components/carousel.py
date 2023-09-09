@@ -10,7 +10,8 @@ def create_carousel():
                     [
                         dbc.Tab(label="Gráficos Inteligentes", tab_id="tab-1"),
                         dbc.Tab(label="Versatilidade", tab_id="tab-2"),
-                        dbc.Tab(label="Facilidade", tab_id='tab-3')
+                        dbc.Tab(label="Facilidade", tab_id='tab-3'),
+                        dbc.Tab(label="Custo", tab_id='tab-4')
                     ],
                     id="card-tabs",
                     active_tab="tab-1",
@@ -68,6 +69,22 @@ def tab_content(active_tab):
                 html.P('''Com a versatilidade a facilidade vem junto, já que todo esse processo de 
                        leitura de dados pode 
                        ser feito na própria interface web, sem a necessidade de mexer no código.''',
+                       className='text-center')
+
+            ], style={'width': '50%', 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center'}),
+
+            html.Img(src='assets/imagetab1.jpg',
+                     style={'border-radius': '10px', 'float': 'right', 'width': '50%', 'height': '60vh'})
+        ], style={'height': '60vh', 'background-color': '#0C0F22', 'color': 'white', 'border-radius': '10px',
+                  'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center'})
+    elif active_tab == 'tab-4':
+        return html.Div([
+            html.Div([
+                html.H4("Custo", className='text-center mt-2'),
+
+                html.P('''O FordBot funciona por requisições, cada requisição possui um custo
+                estimado em 0.06c para cada requisição o que podemos concluir que o custo é bem abaixo
+                de concorrências''',
                        className='text-center')
 
             ], style={'width': '50%', 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center'}),

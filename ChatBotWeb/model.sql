@@ -44,6 +44,26 @@ CREATE TABLE faturamento (
     valor_faturamento FLOAT NOT NULL
 );
 
+CREATE TABLE Brasil (
+    ID_BRASIL INT AUTO_INCREMENT PRIMARY KEY,
+    estado VARCHAR(255) NOT NULL,
+    cidade VARCHAR(255) NOT NULL,
+    latitude DECIMAL(10, 6) NOT NULL,
+    longitude DECIMAL(10, 6) NOT NULL
+);
+
+CREATE TABLE veiculos_ativos (
+    id_veiculo_ativo INT AUTO_INCREMENT PRIMARY KEY,
+    modelo VARCHAR(255) NOT NULL,
+    placa VARCHAR(10) NOT NULL,
+    ID_BRASIL INT,
+    FOREIGN KEY (ID_BRASIL) REFERENCES Brasil(ID_BRASIL)
+);
+
+ALTER TABLE VEICULO_PROBLEMA ADD COLUMN KM_RODADO FLOAT;
+DELETE FROM VEICULO_PROBLEMA WHERE ID_PROBLEMA BETWEEN 11 AND 20;
+UPDATE VEICULO_PROBLEMA SET KM_RODADO = CAST(RAND() * 1000 AS DECIMAL(10,2)) WHERE ID_PROBLEMA BETWEEN 1 AND 20;
+
 
 
 INSERT INTO cliente (nome_cliente, idade, cpf) VALUES
@@ -208,7 +228,87 @@ INSERT INTO faturamento (data_faturamento, valor_faturamento) VALUES
     ('2020-03-11', 150000.00),
     ('2020-02-12', 1800000.00),;
 
+INSERT INTO Brasil (estado, cidade, latitude, longitude) VALUES
+    ('São Paulo', 'São Paulo', -23.5505, -46.6333),
+    ('São Paulo', 'Campinas', -22.9071, -47.0632),
+    ('São Paulo', 'Santos', -23.9535, -46.3343),
+	('Rio de Janeiro', 'Rio de Janeiro', -22.9068, -43.1729),
+    ('Rio de Janeiro', 'Niterói', -22.8811, -43.1042),
+    ('Rio de Janeiro', 'Petrópolis', -22.5132, -43.2096),
+    ('Santa Catarina', 'Florianópolis', -27.5954, -48.5480),
+    ('Santa Catarina', 'Joinville', -26.3039, -48.8411),
+    ('Santa Catarina', 'Blumenau', -26.9185, -49.0650),
+	('Amazonas', 'Manaus', -3.1190, -60.0217),
+    ('Amazonas', 'Parintins', -2.6276, -56.7350),
+    ('Amazonas', 'Itacoatiara', -3.1377, -58.4442),
+	('Espírito Santo', 'Vitória', -20.3155, -40.3128),
+    ('Espírito Santo', 'Vila Velha', -20.3297, -40.2925),
+    ('Espírito Santo', 'Cariacica', -20.2637, -40.4165),
+	('Pará', 'Belém', -1.4558, -48.4902),
+    ('Pará', 'Santarém', -2.4392, -54.7150),
+    ('Pará', 'Ananindeua', -1.3650, -48.3725),
+     ('Maranhão', 'São Luís', -2.5290, -44.3020),
+    ('Maranhão', 'Imperatriz', -5.5183, -47.4777),
+    ('Maranhão', 'Caxias', -4.8654, -43.3611),
+    ('Pernambuco', 'Recife', -8.0476, -34.8770),
+    ('Pernambuco', 'Caruaru', -8.2846, -35.9798),
+    ('Pernambuco', 'Petrolina', -9.3887, -40.5001),
+	('Bahia', 'Salvador', -12.9716, -38.5016),
+    ('Bahia', 'Feira de Santana', -12.2575, -38.9665),
+    ('Bahia', 'Vitória da Conquista', -14.8661, -40.8397),
+	('Rio Grande do Sul', 'Porto Alegre', -30.0346, -51.2177),
+    ('Rio Grande do Sul', 'Caxias do Sul', -29.1658, -51.1794),
+    ('Rio Grande do Sul', 'Pelotas', -31.7662, -52.3213);
 
-ALTER TABLE VEICULO_PROBLEMA ADD COLUMN KM_RODADO FLOAT;
-DELETE FROM VEICULO_PROBLEMA WHERE ID_PROBLEMA BETWEEN 11 AND 20;
-UPDATE VEICULO_PROBLEMA SET KM_RODADO = CAST(RAND() * 1000 AS DECIMAL(10,2)) WHERE ID_PROBLEMA BETWEEN 1 AND 20;
+    INSERT INTO veiculos_ativos (modelo, placa, ID_BRASIL) VALUES
+    ('Ford Focus', 'ABC1234', 1),
+    ('Ford Fiesta', 'DEF5678', 2),
+    ('Ford Fusion', 'GHI9012', 3),
+    ('Ford Mustang', 'JKL3456', 4),
+    ('Ford Escape', 'MNO7890', 5),
+    ('Ford Explorer', 'PQR1234', 6),
+    ('Ford Edge', 'STU5678', 7),
+    ('Ford Ranger', 'VWX9012', 8),
+    ('Ford F-150', 'YZA3456', 9),
+    ('Ford EcoSport', 'BCD7890', 10),
+    ('Ford Taurus', 'EFG1234', 11),
+    ('Ford Bronco', 'HIJ5678', 12),
+    ('Ford Expedition', 'KLM9012', 13),
+    ('Ford Transit', 'NOP3456', 14),
+    ('Ford Super Duty', 'QRS7890', 15),
+    ('Ford GT', 'TUV1234', 16),
+    ('Ford Crown Victoria', 'WXY5678', 17),
+    ('Ford Thunderbird', 'ZAB9012', 18),
+    ('Ford Aspire', 'BCD2345', 19),
+    ('Ford Contour', 'EFG6789', 20),
+    ('Ford Taurus X', 'HIJ0123', 21),
+    ('Ford Windstar', 'KLM3456', 22),
+    ('Ford Freestar', 'NOP7890', 23),
+    ('Ford Flex', 'QRS1234', 24),
+    ('Ford Aerostar', 'TUV5678', 25),
+    ('Ford Transit Connect', 'WXY9012', 26),
+    ('Ford Bronco Sport', 'ZAB3456', 27),
+    ('Ford Escort', 'BCD6789', 28),
+    ('Ford Probe', 'EFG0123', 29),
+    ('Ford Festiva', 'HIJ4567', 30),
+    ('Ford Aspire', 'KLM8901', 30),
+    ('Ford Focus', 'NOP2345', 29),
+    ('Ford Taurus', 'QRS6789', 28),
+    ('Ford Escort', 'TUV0123', 27),
+    ('Ford Fiesta', 'WXY4567', 26),
+    ('Ford Contour', 'ZAB8901', 25),
+    ('Ford Thunderbird', 'BCD2345', 24),
+    ('Ford Mustang', 'EFG6789', 23),
+    ('Ford GT', 'HIJ0123', 22),
+    ('Ford Explorer', 'KLM4567', 21),
+    ('Ford Expedition', 'NOP8901', 20),
+    ('Ford Escape', 'QRS2345', 19),
+    ('Ford Edge', 'TUV6789', 18),
+    ('Ford EcoSport', 'WXY0123', 16),
+    ('Ford Fusion', 'ZAB4567', 17),
+    ('Ford Transit', 'BCD8901', 1),
+    ('Ford Ranger', 'EFG2345', 4),
+    ('Ford F-150', 'HIJ6789', 1),
+    ('Ford Super Duty', 'KLM0123', 1),
+    ('Ford Bronco', 'NOP4567', 1);
+
