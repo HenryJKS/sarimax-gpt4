@@ -83,8 +83,7 @@ def tab_content(active_tab):
                 html.H4("Custo", className='text-center mt-2'),
 
                 html.P('''O FordBot funciona por requisições, cada requisição possui um custo
-                estimado em 0.06c para cada requisição o que podemos concluir que o custo é bem abaixo
-                de concorrências''',
+                estimado em 0.06c o que podemos concluir que o custo é satisfatório para grande empresas''',
                        className='text-center')
 
             ], style={'width': '50%', 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center'}),
