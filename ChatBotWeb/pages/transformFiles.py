@@ -1,9 +1,10 @@
-import base64
 import dash
-from ChatBotWeb.components import navbar
-from dash import html, dcc, callback, Input, Output
+from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
+import os
+import base64
+from docx2pdf import convert
 
 NAVBAR = navbar.create_navbar()
 
@@ -15,73 +16,58 @@ dash.register_page(
     external_stylesheets=[dbc.themes.LITERA]
 )
 
-layout = dbc.Container([
-
+layout = html.Div([
     dbc.Row([
         NAVBAR
     ]),
 
-    html.Div([
-        html.H2("Página de Transformação de Arquivos", className='text-center mt-2'),
-    ]),
+    html.H2("Upload de Arquivos .docx"),
 
-    html.Hr(),
-
+    # Componente DashUploader para o upload de arquivos
     html.Div([
         dcc.Upload(
             id='upload-data',
             children=html.Div([
-                'Arraste ou Solte ou ',
-                html.A('Selecione o Arquivo')
+                'Arraste e solte ou ',
+                html.A('selecione um arquivo .docx')
             ]),
-            multiple=False
+            multiple=False,
+            style={'width': '28%'}
         ),
-    ], className='mt-2'),
-
-    html.Div([
-        dcc.Dropdown(
-            id='transform-options',
-            options=[
-                {'label': 'Converter para letras maiúsculas', 'value': 'uppercase'}
-            ],
-            value='uppercase'
-        ),
-    ], className='mt-2'),
-
-    html.Div([
-        html.Button('Aplicar Transformação', id='apply-button', className='btn btn-primary'),
-    ], className='mt-2'),
-
-
-    html.Div(id='output-data')
-], fluid=True, style={'background-color': '#e8f5ff', 'height': '100%'})
-
-
-def apply_transformation(contents, transformation):
-    decoded_contents = base64.b64decode(contents.split(',')[1])
-    data = decoded_contents.decode('utf-8')
-
-    if transformation == 'uppercase':
-        transformed_data = data.upper()
-    else:
-        transformed_data = data
-
-    return transformed_data
+        html.Div(id='output-data-upload-info'),
+    ]),
+])
 
 
 @callback(
-    Output('output-data', 'children'),
-    [Input('apply-button', 'n_clicks')],
-    [dash.dependencies.State('upload-data', 'contents'),
-     dash.dependencies.State('transform-options', 'value')]
+    Output('output-data-upload-info', 'children'),
+    Input('upload-data', 'contents'),
+    Input('upload-data', 'filename')
 )
-def update_output(n_clicks, contents, transformation):
-    if n_clicks is None or contents is None:
-        return ""
+def display_and_convert_to_pdf(contents, filename):
+    if contents is not None and filename is not None:
+        # Criar um diretório temporário para salvar o arquivo .docx
+        temp_dir = 'temp_dir'
+        os.makedirs(temp_dir, exist_ok=True)
+        docx_path = os.path.join(temp_dir, filename)
 
-    transformed_data = apply_transformation(contents, transformation)
+        # Salvar o conteúdo do arquivo .docx no diretório temporário
+        with open(docx_path, 'wb') as f:
+            f.write(contents[0])
 
-    return html.Div([
-        html.H3("Resultado da Transformação:"),
-        html.Pre(transformed_data)
-    ])
+        # Converter o arquivo .docx para .pdf
+        pdf_filename = filename.replace('.docx', '.pdf')
+        pdf_path = os.path.join(temp_dir, pdf_filename)
+        convert(docx_path, pdf_path)
+
+        # Exibir informações sobre o arquivo enviado e o link para o arquivo .pdf gerado
+        return [
+            html.Div(f'Arquivo carregado: {filename}, Tamanho: {os.path.getsize(docx_path)} bytes'),
+            html.A(f'Link para o arquivo PDF gerado: {pdf_filename}', href=pdf_path)
+        ]
+    else:
+        return ''
+
+
+
+

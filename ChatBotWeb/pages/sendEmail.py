@@ -1,12 +1,14 @@
 import dash
+import dash_quill
 import base64
 from ChatBotWeb.components import navbar
-from dash import html, dcc, callback, Input, Output, State
+from dash import html, dcc, callback, Input, Output
 import smtplib, ssl
 from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
+
 from Script.config import MAIL_PASSWORD, MAIL
 import dash_bootstrap_components as dbc
 
@@ -50,7 +52,10 @@ layout = dbc.Container([
             html.Label("Mensagem:"),
         ]),
 
-        dcc.Textarea(id='message', placeholder='Digite a mensagem', style={'width': '100%', 'height': 150}),
+        dash_quill.Quill(
+            id='message',
+        ),
+
     ], className='mt-2'),
 
     html.Div([
@@ -112,7 +117,7 @@ def send_mail(n_clicks, receiver_address, subject, message, attachment_contents,
         if subject is None:
             return html.Div("Insira o assunto do envio", className='text-danger mt-2')
 
-        msg.attach(MIMEText(message, 'plain'))
+        msg.attach(MIMEText(message, 'html'))
 
         context = ssl.create_default_context()
 
