@@ -52,12 +52,15 @@ def create_pdf(dataframe, filename, chat_log, selected_data):
     elements.append(Spacer(1, 20))
     # Adicione o log de perguntas e respostas do chat
     elements.append(Paragraph("Chat Log:", styles['Heading1']))
-    for entry in chat_log:
-        question, answer = entry
-        elements.append(Paragraph(f"Pergunta: {question}", styles['Normal']))
-        elements.append(Spacer(1, 10))
-        elements.append(Paragraph(f"Resposta: {answer}", styles['Normal']))
-        elements.append(Spacer(1, 30))
+    if chat_log is not None:
+        for entry in chat_log:
+            question, answer = entry
+            elements.append(Paragraph(f"Pergunta: {question}", styles['Normal']))
+            elements.append(Spacer(1, 10))
+            elements.append(Paragraph(f"Resposta: {answer}", styles['Normal']))
+            elements.append(Spacer(1, 30))
+    else:
+        elements.append(Paragraph("Nenhuma pergunta foi feita", styles['Normal']))
 
     # Construa o PDF
     doc.build(elements)

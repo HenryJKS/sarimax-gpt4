@@ -8,7 +8,6 @@ from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
-
 from Script.config import MAIL_PASSWORD, MAIL
 import dash_bootstrap_components as dbc
 

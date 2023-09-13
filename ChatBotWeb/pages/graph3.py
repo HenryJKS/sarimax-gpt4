@@ -75,6 +75,8 @@ layout = dbc.Container([
         ),
     ], className='mt-2'),
 
+    dcc.Store(id='chatlog', storage_type='memory')
+
 ], fluid=True)
 
 
@@ -119,10 +121,11 @@ def update_problemas_card(selected_modelo):
     ])
 
 
-@callback(Output('response-problem', 'children'),
+@callback([Output('response-problem', 'children'), Output('chatlog', 'data')],
           Input('send-question', 'n_clicks'),
-          State('question', 'value'))
-def response(n_clicks, question):
+          State('question', 'value'),
+          State('chatlog', 'data'))
+def response(n_clicks, question, data):
     if not n_clicks:
         return dash.no_update
     elif n_clicks is None:
@@ -130,16 +133,21 @@ def response(n_clicks, question):
 
     resposta = chat_analise_veiculo(f"dados: {df}, pergunta: {question}")
 
-    chat_log.append((question, resposta))
+    # chat_log.append((question, resposta))
 
     # print(f"dados: {df}, pergunta: {question}")
+
+    if data is None:
+        data = []
+
+    data.append((question, resposta))
 
     if question is None:
         return (
             html.P('Insira um pergunta', className='text-center border border-dark rounded', style={'padding': '2%'})
         )
     return (
-        html.P(resposta, className='text-center border border-dark rounded', style={'padding': '2%'})
+        html.P(resposta, className='text-center border border-dark rounded', style={'padding': '2%'}), data
     )
 
 
@@ -147,22 +155,17 @@ def response(n_clicks, question):
     Output('download-pdf', 'data'),
     Input('gerar-relatorio-button', 'n_clicks'),
     State('modelo-dropdown', 'value'),
-    State('modelo-dropdown', 'options'),  # Selecione os dados apropriados aqui
+    State('modelo-dropdown', 'options'), # Selecione os dados apropriados aqui
+    State('chatlog', 'data'),
     prevent_initial_call=True
 )
-def download_pdf(n_clicks, selected_modelo, selected_options):
+def download_pdf(n_clicks, selected_modelo, selected_options, chatlog):
     if n_clicks and selected_modelo:
         filtered_df = df[df['MODELO'] == selected_modelo]
         selected_data = [f"{option['label']}: {option['value']}" for option in selected_options]
         filename = f"pdf\\relatorio_{selected_modelo}.pdf"
-        create_pdf(filtered_df, filename, chat_log, selected_data)  # Passe os dados selecionados
+        create_pdf(filtered_df, filename, chatlog, selected_data)  # Passe os dados selecionados
         with open(filename, "rb") as pdf_file:
             pdf_data = pdf_file.read()
             return dcc.send_bytes(pdf_data, filename=filename)
     return None
-
-
-
-
-
-
