@@ -8,22 +8,46 @@ from docx2pdf import convert
 
 NAVBAR = navbar.create_navbar()
 
-dash.register_page(
-    __name__,
-    name='tranformFiles',
-    top_navbar=True,
-    path='/transform',
-    external_stylesheets=[dbc.themes.LITERA]
-)
+app = dash.Dash(__name__, use_pages=False, external_stylesheets=[dbc.themes.LITERA])
 
-layout = html.Div([
+"""dash.register_page(
+    __name__,
+    name='cnoversionFiles',
+    top_navbar=True,
+    path='/conversion',
+    external_stylesheets=[dbc.themes.LITERA]
+)"""
+
+app.layout = html.Div([
     dbc.Row([
         NAVBAR
     ]),
 
-    html.H2("Upload de Arquivos .docx"),
+    html.H2([
+        "Conversão de Arquivos"
+    ], className='text-center mt-2'),
 
-    # Componente DashUploader para o upload de arquivos
+    html.Hr(),
+
+    html.Div(
+        dbc.ButtonGroup(
+            dbc.DropdownMenu(
+                [
+                    dbc.DropdownMenuItem('PDF to Docx', id='pdf_to_docx', key=1),
+                    dbc.DropdownMenuItem('Docx to PDF', id='docx_to_pdf', key=2), ],
+                label="Selecione o tipo de conversão",
+                group=True,
+                id='select_conversion'
+            ),
+        ),
+    ),
+
+    html.Hr(),
+
+    html.Div(
+        id="naosei"
+    ),
+
     html.Div([
         dcc.Upload(
             id='upload-data',
@@ -39,19 +63,40 @@ layout = html.Div([
 ])
 
 
-@callback(
+@app.callback(
+    Output('naosei', 'children'),
+    [
+        Input('pdf_to_docx', 'n_clicks'),
+        Input('docx_to_pdf', 'n_clicks'),
+    ]
+)
+def transform_files(a1, a2):
+    ctx = dash.callback_context
+
+    if not ctx.triggered:
+        return ''
+    else:
+        item_id = ctx.triggered[0]["prop_id"].split(".")[0]
+
+    if item_id == "pdf_to_docx":
+        return 'pdf_to_docx'
+    elif item_id == 'docx_to_pdf':
+        return 'docx_to_pdf'
+
+
+@app.callback(
     Output('output-data-upload-info', 'children'),
     Input('upload-data', 'contents'),
     Input('upload-data', 'filename')
 )
 def display_and_convert_to_pdf(contents, filename):
     if contents is not None and filename is not None:
-        # Criar um diretório temporário para salvar o arquivo .docx
         temp_dir = 'temp_dir'
         os.makedirs(temp_dir, exist_ok=True)
         docx_path = os.path.join(temp_dir, filename)
 
-        # Salvar o conteúdo do arquivo .docx no diretório temporário
+
+
         with open(docx_path, 'wb') as f:
             f.write(contents[0])
 
@@ -69,5 +114,5 @@ def display_and_convert_to_pdf(contents, filename):
         return ''
 
 
-
-
+if __name__ == '__main__':
+    app.run(debug=True)

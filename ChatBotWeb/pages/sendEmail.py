@@ -21,6 +21,16 @@ dash.register_page(
     external_stylesheets=[dbc.themes.LITERA]
 )
 
+quill_mods = [
+    [{'header': '1'}, {'header': '2'}, {'font': []}],
+    [{'size': []}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'},
+     {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image'],
+    ['clean']
+]
+
 layout = dbc.Container([
     dbc.Row([
         NAVBAR
@@ -53,6 +63,7 @@ layout = dbc.Container([
 
         dash_quill.Quill(
             id='message',
+            modules={'toolbar': quill_mods}
         ),
 
     ], className='mt-2'),
@@ -144,8 +155,11 @@ def send_mail(n_clicks, receiver_address, subject, message, attachment_contents,
 
 
 @callback(Output('file-list', 'children'),
-          Input('attachment-upload', 'filename'))
+              Input('attachment-upload', 'filename'))
 def update_output(attachment_filenames):
     if attachment_filenames is None:
         return html.Div('Nenhum Arquivo Anexado', className='text-info')
     return html.Div(f'Arquivo Anexado(s): {attachment_filenames[:]}', className='text-success')
+
+
+
