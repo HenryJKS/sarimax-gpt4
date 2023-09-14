@@ -21,7 +21,7 @@ def create_navbar():
                                 dbc.DropdownMenuItem("Transformar Arquivo", href="/transform"),
                                 dbc.DropdownMenuItem("Something else here", href="#"),
                                 dbc.DropdownMenuItem(divider=True),
-                                dbc.DropdownMenuItem("Separated link", href="#"),
+                                dbc.DropdownMenuItem("FordBot Security", href="/crypto"),
                             ],
                             label="Opções",
                             nav=True,
