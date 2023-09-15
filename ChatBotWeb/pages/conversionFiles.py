@@ -4,6 +4,8 @@ import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
 import os
 import base64
+import pandas as pd
+import pythoncom
 from docx2pdf import convert
 
 NAVBAR = navbar.create_navbar()
@@ -19,16 +21,19 @@ app = dash.Dash(__name__, use_pages=False, external_stylesheets=[dbc.themes.LITE
 )"""
 
 app.layout = html.Div([
+    # Navbar
     dbc.Row([
         NAVBAR
     ]),
 
+    #Título
     html.H2([
         "Conversão de Arquivos"
     ], className='text-center mt-2'),
 
     html.Hr(),
 
+    # Selecionar tipo de arquivo
     html.Div(
         dbc.ButtonGroup(
             dbc.DropdownMenu(
@@ -39,13 +44,15 @@ app.layout = html.Div([
                 group=True,
                 id='select_conversion'
             ),
+            className="justify-content-center",
         ),
+        style={"display": "flex, w"}
     ),
 
     html.Hr(),
 
     html.Div(
-        id="naosei"
+        id="selected_file"
     ),
 
     html.Div([
@@ -60,11 +67,16 @@ app.layout = html.Div([
         ),
         html.Div(id='output-data-upload-info'),
     ]),
+
+    html.Div([
+        html.Button("Baixar arquivo", id="btn-download-txt"),
+        dcc.Download(id='download-pdf')
+    ])
 ])
 
 
 @app.callback(
-    Output('naosei', 'children'),
+    Output('selected_file', 'children'),
     [
         Input('pdf_to_docx', 'n_clicks'),
         Input('docx_to_pdf', 'n_clicks'),
@@ -78,40 +90,65 @@ def transform_files(a1, a2):
     else:
         item_id = ctx.triggered[0]["prop_id"].split(".")[0]
 
-    if item_id == "pdf_to_docx":
-        return 'pdf_to_docx'
-    elif item_id == 'docx_to_pdf':
-        return 'docx_to_pdf'
+        if item_id == "pdf_to_docx":
+            return 'pdf_to_docx'
+        elif item_id == 'docx_to_pdf':
+            return 'docx_to_pdf'
 
 
 @app.callback(
     Output('output-data-upload-info', 'children'),
-    Input('upload-data', 'contents'),
-    Input('upload-data', 'filename')
+    [
+        Input('upload-data', 'contents'),
+        Input('upload-data', 'filename')
+    ]
 )
-def display_and_convert_to_pdf(contents, filename):
-    if contents is not None and filename is not None:
+def display_and_convert_to_pdf(content, filename):
+    if content is not None and filename is not None:
+        content_str = content.split(",")[1]
+        file_bytes = base64.b64decode(content_str)
+
         temp_dir = 'temp_dir'
         os.makedirs(temp_dir, exist_ok=True)
+
         docx_path = os.path.join(temp_dir, filename)
 
-
-
         with open(docx_path, 'wb') as f:
-            f.write(contents[0])
+            f.write(file_bytes)
 
-        # Converter o arquivo .docx para .pdf
+        pythoncom.CoInitialize()
+
         pdf_filename = filename.replace('.docx', '.pdf')
         pdf_path = os.path.join(temp_dir, pdf_filename)
         convert(docx_path, pdf_path)
 
-        # Exibir informações sobre o arquivo enviado e o link para o arquivo .pdf gerado
+        print(pdf_path)
+        pythoncom.CoUninitialize()
+
         return [
-            html.Div(f'Arquivo carregado: {filename}, Tamanho: {os.path.getsize(docx_path)} bytes'),
-            html.A(f'Link para o arquivo PDF gerado: {pdf_filename}', href=pdf_path)
+            html.Div(f"Arquivo carregado: {filename}"),
         ]
     else:
         return ''
+
+
+@app.callback(
+    Output('download-pdf', 'data'),
+    Input('btn-download-txt', 'n_clicks'),
+    prevent_initial_call=True,
+)
+def download_pdf(n_clicks):
+    temp_dir = 'temp_dir'
+    files = os.listdir(temp_dir)
+
+    pdfs = [file for file in files if file.lower().endswith('.pdf')]
+    if pdfs:
+        for pdf in pdfs:
+            pdf_path = f'{temp_dir}/{pdf}'
+
+            with open(pdf_path, "rb") as pdf_file:
+                pdf_data = pdf_file.read()
+                return dcc.send_bytes(pdf_data, filename=pdf_path)
 
 
 if __name__ == '__main__':
