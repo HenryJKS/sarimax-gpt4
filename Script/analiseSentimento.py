@@ -8,46 +8,22 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import LinearSVC
+import re
 
 pd.set_option('display.max_columns', None)
 
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
-def analyze_sentiment(df):
-    nltk.download('stopwords')
-    nltk.download('punkt')
-    nltk.download('vader_lexicon')
 
-    stemmer = PorterStemmer()
-    lemmatizer = WordNetLemmatizer()
-    sia = SentimentIntensityAnalyzer()
+df = pd.read_csv('C:\\Users\\Henry Sato\\Desktop\\ProjectChallenge\\ChatBotWeb\\assets\\teste.csv', sep=',')
 
-    df['FEEDBACK'] = df['FEEDBACK'].str.lower()
-
-    # removendo stopwords
-    stop_words = set(stopwords.words('english'))
-    df['FEEDBACK_NO_STOPWORDS'] = df['FEEDBACK'].apply(
-        lambda x: ' '.join([word for word in x.split() if word not in (stop_words)]))
-
-    # aplicando o stemming
-    df['FEEDBACK_STEMMING'] = df['FEEDBACK_NO_STOPWORDS'].apply(
-        lambda x: ' '.join([stemmer.stem(word) for word in word_tokenize(x)]))
-
-    # Aplica o lemmatizer
-    df['FEEDBACK_LEMMATIZER'] = df['FEEDBACK_STEMMING'].apply(
-        lambda x: ' '.join([lemmatizer.lemmatize(word) for word in word_tokenize(x)]))
-
-    # Vectorizing the data
-    vectorizer = TfidfVectorizer()
-    X = vectorizer.fit_transform(df['FEEDBACK_LEMMATIZER'])
-
-    # Usando o SVM para classificar o sentimento
-    svm = LinearSVC()
-    svm.fit(X, df['SENTIMENT'])
-    df['SENTIMENT_SVM'] = svm.predict(X)
-
-    # Usando o Naive Bayes para classificar o sentimento
-    nb = MultinomialNB()
-    nb.fit(X, df['SENTIMENT'])
-    df['SENTIMENT_NB'] = nb.predict(X)
-
-    return df[['VEICULO', 'FEEDBACK', 'SENTIMENT_NLTK', 'COMPOUND']]
+# Training model for sentiment analysis
+# 1. Cleaning data
+# 2. Tokenization
+# 3. Stopwords
+# 4. Stemming
+# 5. Lemmatization
+# 6. Vectorization
+# 7. Training model

@@ -11,7 +11,7 @@ def mysql_query(query):
     db_params = {
         'database': 'challenge',
         'user': 'root',
-        'password': 'jooji@123',
+        'password': 'admin',
         'host': 'localhost',
     }
 

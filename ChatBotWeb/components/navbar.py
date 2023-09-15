@@ -20,7 +20,7 @@ def create_navbar():
                                 dbc.DropdownMenuItem("Enviar Email", href="/sendEmail"),
                                 dbc.DropdownMenuItem("Converter Arquivo", href="/conversion"),
                                 dbc.DropdownMenuItem(divider=True),
-                                dbc.DropdownMenuItem("FordBot Feedback", href="/feedback"),
+                                dbc.DropdownMenuItem("FordBot NLP", href="/feedback"),
                                 dbc.DropdownMenuItem("FordBot Security", href="/crypto"),
                             ],
                             label="Opções",

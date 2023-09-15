@@ -7,7 +7,7 @@ import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
 import base64
 import plotly.express as px
-from Script.analiseSentimento import analyze_sentiment
+# from Script.analiseSentimento import analyze_sentiment
 
 NAVBAR = navbar.create_navbar()
 
@@ -67,7 +67,7 @@ def update_graph(contents, filename):
         content_type, content_string = contents.split(',')
         decoded = base64.b64decode(content_string)
         df = pd.read_csv(io.StringIO(decoded.decode('utf-8')))
-        df = analyze_sentiment(df)
+        # df = analyze_sentiment(df)
         # fazer o count de positivo e negativo
         df = df.groupby(['VEICULO', 'SENTIMENT']).size().reset_index(name='COUNT')
         fig = px.bar(df, x='VEICULO', y='COUNT', color='SENTIMENT', barmode='group')
