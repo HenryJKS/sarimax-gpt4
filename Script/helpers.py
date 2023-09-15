@@ -22,7 +22,7 @@ def docx_to_pdf(docx_content, docx_filename):
         f.write(file_bytes)
 
     pdf_filename = docx_filename.replace('.docx', '.pdf')
-    pdf_path = os.path.join(time, pdf_filename)
+    pdf_path = os.path.join(temp_dir, pdf_filename)
     convert(docx_path, pdf_path)
 
     # print(pdf_path)
@@ -33,5 +33,5 @@ def pdf_to_docx():
     pass
 
 
-def save_file_in_uploads(filename):
-    os.path.join(UPLOAD_PATH, filename)
+def delete_dir():
+    os.remove('../ChatBotWeb/temp_dir')
