@@ -3,7 +3,7 @@ from dash import html, dcc, Output, Input
 import dash_bootstrap_components as dbc
 import time
 
-app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.LITERA])
+app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.LITERA], title='FordBot')
 
 app.layout = html.Div([
     dash.page_container,

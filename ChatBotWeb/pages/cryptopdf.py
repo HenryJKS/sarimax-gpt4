@@ -50,16 +50,15 @@ layout = dbc.Container([
         multiple=False
     ),
 
-    html.Div([
-        dbc.InputGroup([
+    dbc.InputGroup([
             dcc.Input(
                 id='pdf-password',
                 type='password',
-                placeholder='Senha'
+                placeholder='Senha',
             ),
-            html.Button('Enviar', id='submit-button', n_clicks=0, className='btn btn-info text-center')
-        ]),
+            html.Button('Crypt', id='submit-button', n_clicks=0, className='text-center btn btn-primary')
     ], className='mt-2'),
+
 
     html.Div([
 
