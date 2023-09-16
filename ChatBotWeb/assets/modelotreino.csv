@@ -1,71 +1,443 @@
-FEEDBACK,SENTIMENTO
-"I absolutely love my Ford Mustang. It's a fantastic car!",positivo
-"The car is amazing.",positivo
-"I enjoy driving it every day.",positivo
-"The performance is top-notch.",positivo
-"It's a true masterpiece.",positivo
-"I love the sleek design.",positivo
-"The handling is impressive.",positivo
-"The power is exhilarating.",positivo
-"I can't get enough of it.",positivo
-"The exterior is eye-catching.",positivo
-"Driving it is a thrill.",positivo
-"I'm a proud owner.",positivo
-"It never disappoints.",positivo
-"I recommend it to everyone.",positivo
-"Owning it is a dream come true.",positivo
-"It's a symbol of excellence.",positivo
-"I feel powerful behind the wheel.",positivo
-"The interior is comfortable and stylish.",positivo
-"Every drive is an adventure.",positivo
-"I've never had a car like it.",positivo
-"The speed is mind-blowing.",positivo
-"I'm in love with it.",positivo
-"The design is timeless.",positivo
-"It's a true gem.",positivo
-"The acceleration is impressive.",positivo
-"It's the best car I''ve ever owned.",positivo
-"The reliability is outstanding.",positivo
-"It's a performance masterpiece.",positivo
-"I can't imagine my life without it.",positivo
-"The engine sound is music to my ears.",positivo
-"It's my pride and joy.",positivo
-"Driving it is a pure joy.",positivo
-"It's a work of art.",positivo
-"I'm constantly impressed by it.",positivo
-"It's a true American icon.",positivo
-"I'm a die-hard fan.",positivo
-"The quality is superb.",positivo
-"I feel like a rockstar.",positivo
-"The performance is unmatched.",positivo
-"It's a legend.",positivo
-"I'm excited every time I drive it.",positivo
-"It exceeds all expectations.",positivo
-"It's an engineering marvel.",positivo
-"It's a true masterpiece of engineering.",positivo
-"It's a must-have.",positivo
-"The car has too many issues.",negativo
-"I regret buying it.",negativo
-"The fuel efficiency is terrible.",negativo
-"It constantly breaks down.",negativo
-"I'm disappointed with the performance.",negativo
-"The interior is cheap and uncomfortable.",negativo
-"I've had nothing but problems.",negativo
-"It's a money pit.",negativo
-"The handling is poor.",negativo
-"I'm frustrated with the constant repairs.",negativo
-"The resale value is awful.",negativo
-"It's a waste of money.",negativo
-"I can't rely on it.",negativo
-"The build quality is subpar.",negativo
-"I''s uncomfortable for long drives.",negativo
-"The maintenance costs are sky-high.",negativo
-"I've had nothing but headaches.",negativo
-"It's not worth the price.",negativo
-"The engine has issues.",negativo
-"I''m constantly in the shop.",negativo
-"It's a lemon.",negativo
-"The customer service is terrible.",negativo
-"I regret my decision.",negativo
-"It's been a nightmare.",negativo
-"The problems never end.",negativo
+VEICULO,FEEDBACK,SENTIMENTO
+"Ford Mustang","I absolutely love my Ford Mustang. It's a fantastic car!",positivo
+"Ford Mustang","The car is amazing.",positivo
+"Ford Mustang","I enjoy driving it every day.",positivo
+"Ford Mustang","The performance is top-notch.",positivo
+"Ford Mustang","It's a true masterpiece.",positivo
+"Ford Mustang","I love the sleek design.",positivo
+"Ford Mustang","The handling is impressive.",positivo
+"Ford Mustang","The power is exhilarating.",positivo
+"Ford Mustang","I can't get enough of it.",positivo
+"Ford Mustang","The exterior is eye-catching.",positivo
+"Ford Mustang","Driving it is a thrill.",positivo
+"Ford Mustang","I'm a proud owner.",positivo
+"Ford Mustang","It never disappoints.",positivo
+"Ford Mustang","I recommend it to everyone.",positivo
+"Ford Mustang","Owning it is a dream come true.",positivo
+"Ford Mustang","It's a symbol of excellence.",positivo
+"Ford Mustang","I feel powerful behind the wheel.",positivo
+"Ford Mustang","The interior is comfortable and stylish.",positivo
+"Ford Mustang","Every drive is an adventure.",positivo
+"Ford Mustang","I've never had a car like it.",positivo
+"Ford Mustang","The speed is mind-blowing.",positivo
+"Ford Mustang","I'm in love with it.",positivo
+"Ford Mustang","The design is timeless.",positivo
+"Ford Mustang","It's a true gem.",positivo
+"Ford Mustang","The acceleration is impressive.",positivo
+"Ford Mustang","It's the best car I''ve ever owned.",positivo
+"Ford Mustang","The reliability is outstanding.",positivo
+"Ford Mustang","It's a performance masterpiece.",positivo
+"Ford Mustang","I can't imagine my life without it.",positivo
+"Ford Mustang","The engine sound is music to my ears.",positivo
+"Ford Mustang","It's my pride and joy.",positivo
+"Ford Mustang","Driving it is a pure joy.",positivo
+"Ford Mustang","It's a work of art.",positivo
+"Ford Mustang","I'm constantly impressed by it.",positivo
+"Ford Mustang","It's a true American icon.",positivo
+"Ford Mustang","I'm a die-hard fan.",positivo
+"Ford Mustang","The quality is superb.",positivo
+"Ford Mustang","I feel like a rockstar.",positivo
+"Ford Mustang","The performance is unmatched.",positivo
+"Ford Mustang","It's a legend.",positivo
+"Ford Mustang","I'm excited every time I drive it.",positivo
+"Ford Mustang","It exceeds all expectations.",positivo
+"Ford Mustang","It's an engineering marvel.",positivo
+"Ford Mustang","It's a true masterpiece of engineering.",positivo
+"Ford Mustang","It's a must-have.",positivo
+"Ford Mustang","The car has too many issues.",negativo
+"Ford Mustang","I regret buying it.",negativo
+"Ford Mustang","The fuel efficiency is terrible.",negativo
+"Ford Mustang","It constantly breaks down.",negativo
+"Ford Mustang","I'm disappointed with the performance.",negativo
+"Ford Mustang","The interior is cheap and uncomfortable.",negativo
+"Ford Mustang","I've had nothing but problems.",negativo
+"Ford Mustang","It's a money pit.",negativo
+"Ford Mustang","The handling is poor.",negativo
+"Ford Mustang","I'm frustrated with the constant repairs.",negativo
+"Ford Mustang","The resale value is awful.",negativo
+"Ford Mustang","It's a waste of money.",negativo
+"Ford Mustang","I can't rely on it.",negativo
+"Ford Mustang","The build quality is subpar.",negativo
+"Ford Mustang","I''s uncomfortable for long drives.",negativo
+"Ford Mustang","The maintenance costs are sky-high.",negativo
+"Ford Mustang","I've had nothing but headaches.",negativo
+"Ford Mustang","It's not worth the price.",negativo
+"Ford Mustang","The engine has issues.",negativo
+"Ford Mustang","I''m constantly in the shop.",negativo
+"Ford Mustang","It's a lemon.",negativo
+"Ford Mustang","The customer service is terrible.",negativo
+"Ford Mustang","I regret my decision.",negativo
+"Ford Mustang","It's been a nightmare.",negativo
+"Ford Mustang","The problems never end.",negativo
+"Ford Mustang","Great car! I love it.",positivo
+"Ford Mustang","The Ford Mustang is awesome!",positivo
+"Ford Mustang","I had a blast driving the Ford Mustang.",positivo
+"Ford Mustang","Excellent performance and style.",positivo
+"Ford Mustang","I'm very satisfied with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang exceeded my expectations.",positivo
+"Ford Mustang","I'm thrilled with my Ford Mustang purchase.",positivo
+"Ford Mustang","A fantastic car all around.",positivo
+"Ford Mustang","Impressive power and handling.",positivo
+"Ford Mustang","The Ford Mustang is a true American icon.",positivo
+"Ford Mustang","I can't get enough of my Ford Mustang!",positivo
+"Ford Mustang","I highly recommend the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a head-turner.",positivo
+"Ford Mustang","Driving the Ford Mustang is a joy.",positivo
+"Ford Mustang","I feel great behind the wheel of my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang's design is timeless.",positivo
+"Ford Mustang","I'm impressed with the Ford Mustang's quality.",positivo
+"Ford Mustang","The Ford Mustang is a true classic.",positivo
+"Ford Mustang","I love the Ford Mustang's aggressive look.",positivo
+"Ford Mustang","The Ford Mustang is a beast on the road.",positivo
+"Ford Mustang","I'm proud to own a Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a legend.",positivo
+"Ford Mustang","I can't stop smiling when I drive my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is the best car I've ever had.",positivo
+"Ford Mustang","Ford Mustang is my dream car.",positivo
+"Ford Mustang","The Ford Mustang's performance is unmatched.",positivo
+"Ford Mustang","I'm in love with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a work of art.",positivo
+"Ford Mustang","Owning a Ford Mustang is a dream come true.",positivo
+"Ford Mustang","The Ford Mustang is pure adrenaline.",positivo
+"Ford Mustang","I'm thrilled with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a masterpiece.",positivo
+"Ford Mustang","I feel like a rockstar in my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a legend on wheels.",positivo
+"Ford Mustang","I'm addicted to driving my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a beast of a car.",positivo
+"Ford Mustang","I have no regrets buying a Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a dream machine.",positivo
+"Ford Mustang","I'm impressed by the Ford Mustang every day.",positivo
+"Ford Mustang","The Ford Mustang is a symbol of power.",positivo
+"Ford Mustang","I'm in awe of the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true masterpiece.",positivo
+"Ford Mustang","I feel unstoppable in my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true performer.",positivo
+"Ford Mustang","I'm having the time of my life with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is the king of the road.",positivo
+"Ford Mustang","I'm a proud Ford Mustang owner.",positivo
+"Ford Mustang","The Ford Mustang is a showstopper.",positivo
+"Ford Mustang","I'm blown away by the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a force to be reckoned with.",positivo
+"Ford Mustang","I'm living the dream with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true classic.",positivo
+"Ford Mustang","I'm head over heels for my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a masterpiece of engineering.",positivo
+"Ford Mustang","I'm proud to drive a Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true gem.",positivo
+"Ford Mustang","I'm amazed by the Ford Mustang every day.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on wheels.",positivo
+"Ford Mustang","I'm in love with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true legend.",positivo
+"Ford Mustang","I'm having a blast with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a thrill to drive.",positivo
+"Ford Mustang","I'm living the dream with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true masterpiece.",positivo
+"Ford Mustang","I'm proud to be a Ford Mustang owner.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on wheels.",positivo
+"Ford Mustang","I'm in love with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true legend.",positivo
+"Ford Mustang","I'm having a blast with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a thrill to drive.",positivo
+"Ford Mustang","I'm living the dream with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true masterpiece.",positivo
+"Ford Mustang","I'm proud to be a Ford Mustang owner.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on wheels.",positivo
+"Ford Mustang","I'm in love with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true legend.",positivo
+"Ford Mustang","I'm having a blast with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a thrill to drive.",positivo
+"Ford Mustang","I'm living the dream with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true masterpiece.",positivo
+"Ford Mustang","I'm proud to be a Ford Mustang owner.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on wheels.",positivo
+"Ford Mustang","I'm in love with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true legend.",positivo
+"Ford Mustang","I'm having a blast with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a thrill to drive.",positivo
+"Ford Mustang","I regret buying the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is a disappointment.",negativo
+"Ford Mustang","I'm dissatisfied with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang's performance is subpar.",negativo
+"Ford Mustang","I'm not happy with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang fell short of my expectations.",negativo
+"Ford Mustang","I'm disappointed with my Ford Mustang purchase.",negativo
+"Ford Mustang","The Ford Mustang is not as great as they say.",negativo
+"Ford Mustang","The Ford Mustang's handling is poor.",negativo
+"Ford Mustang","The Ford Mustang is overrated.",negativo
+"Ford Mustang","I regret getting a Ford Mustang.",negativo
+"Ford Mustang","I don't recommend the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not worth the hype.",negativo
+"Ford Mustang","I'm not enjoying driving my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not as fun as I thought.",negativo
+"Ford Mustang","I'm disappointed in the Ford Mustang's design.",negativo
+"Ford Mustang","The Ford Mustang's quality is lacking.",negativo
+"Ford Mustang","The Ford Mustang is far from a classic.",negativo
+"Ford Mustang","I dislike the Ford Mustang's aggressive look.",negativo
+"Ford Mustang","The Ford Mustang is not a beast on the road.",negativo
+"Ford Mustang","I'm not proud to own a Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a legend.",negativo
+"Ford Mustang","I'm not enjoying my Ford Mustang at all.",negativo
+"Ford Mustang","The Ford Mustang is not the best car I've had.",negativo
+"Ford Mustang","Ford Mustang is not my dream car.",negativo
+"Ford Mustang","The Ford Mustang's performance is disappointing.",negativo
+"Ford Mustang","I'm not in love with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a work of art.",negativo
+"Ford Mustang","Owning a Ford Mustang is not a dream come true.",negativo
+"Ford Mustang","The Ford Mustang is not pure adrenaline.",negativo
+"Ford Mustang","I'm not thrilled with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a masterpiece.",negativo
+"Ford Mustang","I don't feel like a rockstar in my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a legend on wheels.",negativo
+"Ford Mustang","I'm not addicted to driving my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a beast of a car.",negativo
+"Ford Mustang","I have regrets buying a Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a dream machine.",negativo
+"Ford Mustang","I'm not impressed by the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a symbol of power.",negativo
+"Ford Mustang","I'm not in awe of the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true masterpiece.",negativo
+"Ford Mustang","I don't feel unstoppable in my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true performer.",negativo
+"Ford Mustang","I'm not having the time of my life with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not the king of the road.",negativo
+"Ford Mustang","I'm not a proud Ford Mustang owner.",negativo
+"Ford Mustang","The Ford Mustang is not a showstopper.",negativo
+"Ford Mustang","I'm not impressed by the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a force to be reckoned with.",negativo
+"Ford Mustang","I'm not living the dream with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true classic.",negativo
+"Ford Mustang","I'm not head over heels for my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a masterpiece of engineering.",negativo
+"Ford Mustang","I'm not proud to drive a Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true gem.",negativo
+"Ford Mustang","I'm not amazed by the Ford Mustang every day.",negativo
+"Ford Mustang","The Ford Mustang is not a work of art on wheels.",negativo
+"Ford Mustang","I'm not in love with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true legend.",negativo
+"Ford Mustang","I'm not having a blast with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a thrill to drive.",negativo
+"Ford Mustang","I'm not living the dream with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true masterpiece.",negativo
+"Ford Mustang","I'm not proud to be a Ford Mustang owner.",negativo
+"Ford Mustang","The Ford Mustang is not a work of art on wheels.",negativo
+"Ford Mustang","I'm not in love with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true legend.",negativo
+"Ford Mustang","I'm not having a blast with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a thrill to drive.",negativo
+"Ford Mustang","I'm not living the dream with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true masterpiece.",negativo
+"Ford Mustang","I'm not proud to be a Ford Mustang owner.",negativo
+"Ford Mustang","The Ford Mustang is not a work of art on wheels.",negativo
+"Ford Mustang","I'm not in love with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a true legend.",negativo
+"Ford Mustang","I'm not having a blast with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a thrill to drive.",negativo
+"Ford Mustang","The Ford Mustang is lit!",positivo
+"Ford Mustang","OMG, the Ford Mustang is so awesome!",positivo
+"Ford Mustang","I'm totally vibing with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is fire!",positivo
+"Ford Mustang","My Ford Mustang is the bomb!",positivo
+"Ford Mustang","The Ford Mustang is sick!",positivo
+"Ford Mustang","I can't even with how cool my Ford Mustang is.",positivo
+"Ford Mustang","The Ford Mustang is hella rad.",positivo
+"Ford Mustang","My Ford Mustang is dope AF!",positivo
+"Ford Mustang","The Ford Mustang is straight-up epic.",positivo
+"Ford Mustang","I'm loving the Ford Mustang's swag.",positivo
+"Ford Mustang","The Ford Mustang is low-key amazing.",positivo
+"Ford Mustang","I'm living my best life with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is on fleek!",positivo
+"Ford Mustang","My Ford Mustang is the GOAT!",positivo
+"Ford Mustang","The Ford Mustang is LIT AF!",positivo
+"Ford Mustang","I'm obsessed with my Ford Mustang, TBH.",positivo
+"Ford Mustang","The Ford Mustang is a mood.",positivo
+"Ford Mustang","My Ford Mustang is the real deal.",positivo
+"Ford Mustang","The Ford Mustang is poppin'!",positivo
+"Ford Mustang","I'm all about that Ford Mustang life.",positivo
+"Ford Mustang","The Ford Mustang is legit.",positivo
+"Ford Mustang","My Ford Mustang is straight fire, fam!",positivo
+"Ford Mustang","The Ford Mustang is pure vibes.",positivo
+"Ford Mustang","I'm flexin' with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is next level.",positivo
+"Ford Mustang","My Ford Mustang is lit like a Christmas tree.",positivo
+"Ford Mustang","The Ford Mustang is the real MVP.",positivo
+"Ford Mustang","I'm rollin' in style with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is off the charts.",positivo
+"Ford Mustang","My Ford Mustang is the GOAT, no cap.",positivo
+"Ford Mustang","The Ford Mustang is lit 24/7.",positivo
+"Ford Mustang","I'm vibin' with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is my spirit animal.",positivo
+"Ford Mustang","My Ford Mustang is a game-changer.",positivo
+"Ford Mustang","The Ford Mustang is my ride or die.",positivo
+"Ford Mustang","I'm low-key obsessed with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is the bee's knees.",positivo
+"Ford Mustang","My Ford Mustang is the GOAT, hands down.",positivo
+"Ford Mustang","The Ford Mustang is the GOAT, no doubt.",positivo
+"Ford Mustang","I must express my satisfaction with the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang has truly exceeded my expectations.",positivo
+"Ford Mustang","I am delighted with the performance of my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang boasts excellent power and handling.",positivo
+"Ford Mustang","I am thoroughly pleased with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang has far surpassed my expectations.",positivo
+"Ford Mustang","I am extremely satisfied with my Ford Mustang purchase.",positivo
+"Ford Mustang","The Ford Mustang is nothing short of fantastic.",positivo
+"Ford Mustang","I am impressed with the power and handling of the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true icon of American engineering.",positivo
+"Ford Mustang","I cannot get enough of my Ford Mustang.",positivo
+"Ford Mustang","I highly recommend the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang never fails to turn heads.",positivo
+"Ford Mustang","Driving the Ford Mustang brings me great joy.",positivo
+"Ford Mustang","I feel exceptionally comfortable behind the wheel of my Ford Mustang.",positivo
+"Ford Mustang","The design of the Ford Mustang is timeless.",positivo
+"Ford Mustang","I am deeply impressed with the quality of the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true classic.",positivo
+"Ford Mustang","I admire the aggressive look of the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a force to be reckoned with on the road.",positivo
+"Ford Mustang","I take great pride in owning a Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a legendary vehicle.",positivo
+"Ford Mustang","I can't help but smile every time I drive my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang stands as the best car I've ever owned.",positivo
+"Ford Mustang","The Ford Mustang is my dream car realized.",positivo
+"Ford Mustang","The performance of the Ford Mustang is unmatched.",positivo
+"Ford Mustang","I am head over heels in love with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true masterpiece of automotive design.",positivo
+"Ford Mustang","I take great pride in driving a Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is an absolute gem.",positivo
+"Ford Mustang","I am continually amazed by the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on four wheels.",positivo
+"Ford Mustang","I am deeply infatuated with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true legend in the automotive world.",positivo
+"Ford Mustang","I am thoroughly enjoying every moment with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang reigns as the king of the road.",positivo
+"Ford Mustang","I take great pride in being a Ford Mustang owner.",positivo
+"Ford Mustang","The Ford Mustang is a showstopper in every sense.",positivo
+"Ford Mustang","I am utterly blown away by the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a force to be reckoned with.",positivo
+"Ford Mustang","I am living the dream with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true classic in every sense.",positivo
+"Ford Mustang","I am head over heels for my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang represents a masterpiece of engineering.",positivo
+"Ford Mustang","I am genuinely proud to drive a Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true gem on the road.",positivo
+"Ford Mustang","I am consistently amazed by the Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on the highway.",positivo
+"Ford Mustang","I am deeply in love with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true legend in every aspect.",positivo
+"Ford Mustang","I am thoroughly enjoying my time with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang delivers a thrilling driving experience.",positivo
+"Ford Mustang","I am genuinely proud to be a Ford Mustang owner.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on the road.",positivo
+"Ford Mustang","I am deeply passionate about my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is a true legend in automotive history.",positivo
+"Ford Mustang","I am having a blast with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang is an absolute joy to drive.",positivo
+"Ford Mustang","I am truly living the dream with my Ford Mustang.",positivo
+"Ford Mustang","The Ford Mustang represents a true masterpiece.",positivo
+"Ford Mustang","I am exceptionally proud to be a Ford Mustang owner.",positivo
+"Ford Mustang","The Ford Mustang is a work of art on the highway.",positivo
+"Ford Mustang","Ugh, the Ford Mustang is a letdown.",negativo
+"Ford Mustang","I'm so disappointed with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is a total buzzkill.",negativo
+"Ford Mustang","My Ford Mustang is a major bummer.",negativo
+"Ford Mustang","The Ford Mustang is a flop.",negativo
+"Ford Mustang","I can't even with my disappointing Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is a massive disappointment.",negativo
+"Ford Mustang","I'm bummed out about my Ford Mustang purchase.",negativo
+"Ford Mustang","The Ford Mustang is just not cool.",negativo
+"Ford Mustang","My Ford Mustang is a letdown, big time.",negativo
+"Ford Mustang","I'm not feeling it with the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is a total downer.",negativo
+"Ford Mustang","I'm not vibing with my Ford Mustang at all.",negativo
+"Ford Mustang","The Ford Mustang is a major letdown.",negativo
+"Ford Mustang","My Ford Mustang is a complete disappointment.",negativo
+"Ford Mustang","The Ford Mustang is a total letdown.",negativo
+"Ford Mustang","I'm seriously bummed about my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is a major disappointment.",negativo
+"Ford Mustang","I'm not impressed with my Ford Mustang, at all.",negativo
+"Ford Mustang","My Ford Mustang is a letdown, no doubt.",negativo
+"Ford Mustang","The Ford Mustang is a total bummer.",negativo
+"Ford Mustang","I'm so over my disappointing Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is a flop, plain and simple.",negativo
+"Ford Mustang","My Ford Mustang is just not up to par.",negativo
+"Ford Mustang","The Ford Mustang is a major letdown, unfortunately.",negativo
+"Ford Mustang","I'm not thrilled with my Ford Mustang, to say the least.",negativo
+"Ford Mustang","My Ford Mustang is a disappointment, through and through.",negativo
+"Ford Mustang","The Ford Mustang is a letdown, without a doubt.",negativo
+"Ford Mustang","I'm not enjoying my Ford Mustang one bit.",negativo
+"Ford Mustang","The Ford Mustang is a major disappointment, sadly.",negativo
+"Ford Mustang","My Ford Mustang is a total letdown, regrettably.",negativo
+"Ford Mustang","The Ford Mustang is a complete disappointment, I'm afraid.",negativo
+"Ford Mustang","I'm not a fan of my Ford Mustang, to be honest.",negativo
+"Ford Mustang","My Ford Mustang is a letdown, no two ways about it.",negativo
+"Ford Mustang","The Ford Mustang is a major letdown, without question.",negativo
+"Ford Mustang","I'm not having any fun with my Ford Mustang, unfortunately.",negativo
+"Ford Mustang","The Ford Mustang is a total letdown, and it hurts.",negativo
+"Ford Mustang","My Ford Mustang is a major disappointment, and that's that.",negativo
+"Ford Mustang","The Ford Mustang is a flop, and it's disheartening.",negativo
+"Ford Mustang","I'm not vibing with my Ford Mustang, and it's a shame.",negativo
+"Ford Mustang","My Ford Mustang is a letdown, plain and simple.",negativo
+"Ford Mustang","The Ford Mustang is a total disappointment, and it stings.",negativo
+"Ford Mustang","I'm not feeling my Ford Mustang at all, and it's frustrating.",negativo
+"Ford Mustang","The Ford Mustang is a letdown, and it's tough to accept.",negativo
+"Ford Mustang","I must express my dissatisfaction with the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang has truly fallen short of my expectations.",negativo
+"Ford Mustang","I am quite displeased with the performance of my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang lacks the power and handling I expected.",negativo
+"Ford Mustang","I am thoroughly dissatisfied with my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang has failed to meet my expectations.",negativo
+"Ford Mustang","I am deeply unsatisfied with my Ford Mustang purchase.",negativo
+"Ford Mustang","The Ford Mustang is far from fantastic.",negativo
+"Ford Mustang","I am not impressed with the power and handling of the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang falls short as an icon of American engineering.",negativo
+"Ford Mustang","I cannot get over my disappointment with my Ford Mustang.",negativo
+"Ford Mustang","I strongly discourage considering the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang does not live up to the hype.",negativo
+"Ford Mustang","I am not enjoying driving my Ford Mustang whatsoever.",negativo
+"Ford Mustang","The Ford Mustang is far from fun as I originally thought.",negativo
+"Ford Mustang","I'm disappointed in the design of the Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang's quality leaves much to be desired.",negativo
+"Ford Mustang","The Ford Mustang is far from being a classic.",negativo
+"Ford Mustang","I am not a fan of the Ford Mustang's aggressive look.",negativo
+"Ford Mustang","The Ford Mustang falls short as a force on the road.",negativo
+"Ford Mustang","I do not take pride in owning a Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is anything but legendary.",negativo
+"Ford Mustang","I am not enjoying my Ford Mustang, to say the least.",negativo
+"Ford Mustang","The Ford Mustang is far from the best car I've owned.",negativo
+"Ford Mustang","Ford Mustang is not my dream car by any means.",negativo
+"Ford Mustang","The performance of the Ford Mustang is deeply disappointing.",negativo
+"Ford Mustang","I am not in love with my Ford Mustang, sadly.",negativo
+"Ford Mustang","The Ford Mustang is far from a work of art.",negativo
+"Ford Mustang","Owning a Ford Mustang has not been a dream come true.",negativo
+"Ford Mustang","The Ford Mustang is lacking in adrenaline.",negativo
+"Ford Mustang","I am not thrilled with my Ford Mustang, to be honest.",negativo
+"Ford Mustang","The Ford Mustang is not a masterpiece by any measure.",negativo
+"Ford Mustang","I do not feel like a rockstar in my Ford Mustang.",negativo
+"Ford Mustang","The Ford Mustang is not a legend on the road.",negativo
+"Ford Mustang","I am not addicted to driving my Ford Mustang, unfortunately.",negativo
+"Ford Mustang","The Ford Mustang is far from a beast of a car.",negativo
+"Ford Mustang","I regret buying a Ford Mustang, without a doubt.",negativo
+"Ford Mustang","The Ford Mustang is not a dream machine, sadly.",negativo
+"Ford Mustang","I'm not impressed by the Ford Mustang, to say the least.",negativo
+"Ford Mustang","The Ford Mustang does not symbolize power.",negativo
+"Ford Mustang","I am not in awe of the Ford Mustang, regrettably.",negativo
+"Ford Mustang","The Ford Mustang is not a true masterpiece, I'm afraid.",negativo
+"Ford Mustang","I don't feel unstoppable in my Ford Mustang, quite the opposite.",negativo
+"Ford Mustang","The Ford Mustang is not a true performer.",negativo
+"Ford Mustang","I'm not having the time of my life with my Ford Mustang, unfortunately.",negativo
+"Ford Mustang","The Ford Mustang is not the king of the road, far from it.",negativo
+"Ford Mustang","I'm not a proud Ford Mustang owner, to be honest.",negativo
+"Ford Mustang","The Ford Mustang is not a showstopper, quite the opposite.",negativo
+"Ford Mustang","I'm not impressed by the Ford Mustang, not at all.",negativo
+"Ford Mustang","The Ford Mustang is not a force to be reckoned with, sadly.",negativo
+"Ford Mustang","I'm not living the dream with my Ford Mustang, to say the least.",negativo
+"Ford Mustang","The Ford Mustang is far from a true classic.",negativo
+"Ford Mustang","I'm not head over heels for my Ford Mustang, unfortunately.",negativo
+"Ford Mustang","The Ford Mustang is far from a masterpiece of engineering.",negativo
+"Ford Mustang","I am not proud to drive a Ford Mustang, unfortunately.",negativo
+"Ford Mustang","The Ford Mustang is far from a true gem.",negativo
+"Ford Mustang","I am not amazed by the Ford Mustang every day, sadly.",negativo
+"Ford Mustang","The Ford Mustang is far from a work of art on wheels.",negativo
+"Ford Mustang","I'm not in love with my Ford Mustang, to say the least.",negativo
+"Ford Mustang","The Ford Mustang is far from a true legend.",negativo
+"Ford Mustang","I'm not having a blast with my Ford Mustang, quite the opposite.",negativo
+"Ford Mustang","The Ford Mustang is not a thrill to drive, regrettably.",negativo

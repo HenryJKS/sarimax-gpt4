@@ -1,13 +1,13 @@
 import io
-
 import dash
 import pandas as pd
-from dash import html, dcc, Input, Output, State, callback
+from dash import html, dcc, Input, Output, State, callback, dash_table
 import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
 import base64
 import plotly.express as px
-# from Script.analiseSentimento import analyze_sentiment
+from Script.analiseSentimento import classificar_sentimento
+
 
 NAVBAR = navbar.create_navbar()
 
@@ -47,30 +47,74 @@ layout = dbc.Container([
 
     ], id='vehicle', className='mt-2'),
 
+
     html.Div([
-        dcc.Graph(id='graph-nlp')
-    ], className="justify-content-center", style={'width': '80%', 'margin': 'auto', 'margin-top': '2%'}),
+
+        html.Div([], id='graph-nlp'),
+
+        html.Div([], id='table-nlp')
+
+    ], style={'display': 'flex', 'flex-direction': 'row', 'justify-content': 'space-between',
+              'width': '100%', 'margin-top': '2%'}),
+
+], fluid=True, style={'background-color': '#e8f5ff', 'height': '100%'})
 
 
-], fluid=True)
-
-
-@callback(Output('graph-nlp', 'figure'),
+@callback(Output('graph-nlp', 'children'),
           Output('vehicle', 'children'),
+          Output('table-nlp', 'children'),
           Input('uploadcsv', 'contents'),
           State('uploadcsv', 'filename'))
 def update_graph(contents, filename):
     if contents is not None:
         if not filename.lower().endswith('.csv'):
-            return {}, html.P('Somente Arquivo .CSV', className='text-danger')
+            return None, html.P('Somente Arquivos .CSV', className='text-danger'), ''
 
         content_type, content_string = contents.split(',')
         decoded = base64.b64decode(content_string)
         df = pd.read_csv(io.StringIO(decoded.decode('utf-8')))
-        # df = analyze_sentiment(df)
-        # fazer o count de positivo e negativo
-        df = df.groupby(['VEICULO', 'SENTIMENT']).size().reset_index(name='COUNT')
-        fig = px.bar(df, x='VEICULO', y='COUNT', color='SENTIMENT', barmode='group')
-        return fig, html.H5('Veículo: ' + df['VEICULO'][0])
+
+        # chamando a função
+        df = classificar_sentimento(df)
+
+        df_agrupado = df.groupby(['VEICULO', 'SENTIMENTO_PREDICT']).size().reset_index(name='COUNT')
+        df_table = df[['FEEDBACK', 'SENTIMENTO_PREDICT']]
+
+        # Gráfico de donut
+        fig = px.pie(df_agrupado, values='COUNT', names='SENTIMENTO_PREDICT', title='Sentimento dos Feedbacks', hole=0.3)
+
+        fig.update_layout({
+            'plot_bgcolor': '#d6ecfd',
+            'paper_bgcolor': '#d6ecfd',
+            'font': {
+                'size': 12,
+                'color': 'black'
+            },
+            'width': 700,
+            'height': 500,
+        })
+
+        # Criar datatable
+        table = dash_table.DataTable(
+            id='table',
+            columns=[{"name": i, "id": i} for i in df_table.columns],
+            data=df.to_dict('records'),
+            style_header={
+                'backgroundColor': '#103D82',
+                'fontWeight': 'bold',
+                'color': 'white',
+                'textAlign': 'center'
+            },
+            style_cell={
+                'textAlign': 'center',
+            },
+            style_table={
+                'height': 'auto',
+                'overflowY': 'auto'
+            },
+            page_size=10,
+        )
+
+        return dcc.Graph(figure=fig), html.H5('Veículo: ' + df['VEICULO'][0]), table
     else:
-        return {}, html.H5('Veículo: ')
+        return None, html.H5('Veículo: '), None

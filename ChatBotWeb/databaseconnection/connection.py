@@ -6,13 +6,18 @@ import mysql.connector as mysql
 from dotenv import load_dotenv
 load_dotenv()
 
+DATABASE = os.getenv('DATABASE')
+USER = os.getenv('USER')
+PASSWORD = os.getenv('PASSWORD')
+HOST = os.getenv('HOST')
+
 
 def mysql_query(query):
     db_params = {
-        'database': 'challenge',
-        'user': 'root',
-        'password': 'admin',
-        'host': 'localhost',
+        'database': DATABASE,
+        'user': USER,
+        'password': PASSWORD,
+        'host': HOST
     }
 
     connection = mysql.connect(**db_params)
