@@ -44,27 +44,23 @@ layout = dbc.Container([
 
     html.Hr(),
 
-    dbc.InputGroup(
-        [
-            dbc.Input(id='receiver_address', placeholder="Destino"),
-            dbc.InputGroupText("@gmail.com"),
-        ],
-        className="mt-2 mb-2", style={'width': '30%'},
-    ),
+    html.Div([
+        dbc.InputGroup(
+            [
+                dbc.Input(id='receiver_address', placeholder="Destino"),
+                dbc.InputGroupText("@gmail.com"),
+            ],
+            style={'width': '25%', 'margin-right': '10px'},
+        ),
 
-    #
-    # html.Div([
-    #     html.Label("Assunto:"),
-    #     dcc.Input(id='subject', type='text', placeholder='Escreva o assunto'),
-    # ], style={'margin-left': '15px'}),
-
-    dbc.InputGroup(
-        [
-            dbc.InputGroupText("Assunto: "),
-            dbc.Input(id='subject'),
-        ],
-        className="mt-2", style={'width': '30%', 'margin-bottom': '1%'}
-    ),
+        dbc.InputGroup(
+            [
+                dbc.InputGroupText("Assunto: "),
+                dbc.Input(id='subject'),
+            ],
+            style={'width': '25%'}
+        ),
+    ], style={'display': 'flex', 'flex-direction': 'row'}),
 
     html.Div([
         html.Div([
