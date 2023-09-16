@@ -28,7 +28,9 @@ quill_mods = [
     [{'list': 'ordered'}, {'list': 'bullet'},
      {'indent': '-1'}, {'indent': '+1'}],
     ['link', 'image'],
-    ['clean']
+    ['clean'],
+    [{'script': 'sub'}, {'script': 'super'}],
+    [{'direction': 'rtl'}],
 ]
 
 layout = dbc.Container([
@@ -42,19 +44,27 @@ layout = dbc.Container([
 
     html.Hr(),
 
-    html.Div([
+    dbc.InputGroup(
+        [
+            dbc.Input(id='receiver_address', placeholder="Destino"),
+            dbc.InputGroupText("@gmail.com"),
+        ],
+        className="mt-2 mb-2", style={'width': '30%'},
+    ),
 
-        html.Div([
-            html.Label("Destinatário:", className=''),
-            dcc.Input(id='receiver_address', type='email', placeholder='E-Mail do Destino', className=''),
-        ]),
+    #
+    # html.Div([
+    #     html.Label("Assunto:"),
+    #     dcc.Input(id='subject', type='text', placeholder='Escreva o assunto'),
+    # ], style={'margin-left': '15px'}),
 
-        html.Div([
-            html.Label("Assunto:"),
-            dcc.Input(id='subject', type='text', placeholder='Escreva o assunto'),
-        ], style={'margin-left': '15px'}),
-
-    ], className='flex-container', style={'display': 'flex', 'flex-direction': 'row', 'justify-content': 'flex-start'}),
+    dbc.InputGroup(
+        [
+            dbc.InputGroupText("Assunto: "),
+            dbc.Input(id='subject'),
+        ],
+        className="mt-2", style={'width': '30%', 'margin-bottom': '1%'}
+    ),
 
     html.Div([
         html.Div([
@@ -82,7 +92,15 @@ layout = dbc.Container([
                 html.A('Selecione um Arquivo')
             ]),
             multiple=True,
-            style={'width': '28%'}
+            style={'width': '28%',
+                   'height': '60px',
+                   'lineHeight': '60px',
+                   'borderWidth': '1px',
+                   'borderStyle': 'dashed',
+                   'borderRadius': '5px',
+                   'textAlign': 'center',
+                   'margin-top': '10px'
+                   }
         )
     ]),
 
@@ -116,16 +134,26 @@ def send_mail(n_clicks, receiver_address, subject, message, attachment_contents,
         sender_address = MAIL
         sender_password = MAIL_PASSWORD
 
+        if receiver_address is None:
+            return dbc.Alert('Insira um email !', color='danger', className='text-center mt-2')
+
+        # Concatenar o endereço
+        receiver_address = receiver_address + '@gmail.com'
+
+        if receiver_address == sender_address:
+            return dbc.Alert('Não é possível enviar um e-mail para você mesmo!', color='danger',
+                             className='text-center mt-2')
+
+        if subject is None:
+            return dbc.Alert("Insira o assunto do envio", color='danger', className='text-center mt-2')
+
+        if message is None:
+            return dbc.Alert("Insira a mensagem do envio", color='danger', className='text-center mt-2')
+
         msg = MIMEMultipart("")
         msg["Subject"] = subject
         msg["From"] = sender_address
         msg["To"] = receiver_address
-
-        if receiver_address is None:
-            return html.Div('Insira um email !', className='text-danger mt-2')
-
-        if subject is None:
-            return html.Div("Insira o assunto do envio", className='text-danger mt-2')
 
         msg.attach(MIMEText(message, 'html'))
 
@@ -145,7 +173,7 @@ def send_mail(n_clicks, receiver_address, subject, message, attachment_contents,
         with smtplib.SMTP_SSL(mail_server, mail_port, context=context) as server:
             server.login(sender_address, sender_password)
             server.sendmail(sender_address, receiver_address, msg.as_string())
-        return html.Div("E-mail Enviado com Sucesso!", className='text-success mt-2')
+        return dbc.Alert("E-mail Enviado com Sucesso!", color='success', className='text-center mt-2')
     except smtplib.SMTPAuthenticationError:
         return html.Div("Erro de autenticação: Nome de usuário ou senha inválidos.", className='text-danger mt-2')
     except smtplib.SMTPException as e:
@@ -155,11 +183,8 @@ def send_mail(n_clicks, receiver_address, subject, message, attachment_contents,
 
 
 @callback(Output('file-list', 'children'),
-              Input('attachment-upload', 'filename'))
+          Input('attachment-upload', 'filename'))
 def update_output(attachment_filenames):
     if attachment_filenames is None:
         return html.Div('Nenhum Arquivo Anexado', className='text-info')
     return html.Div(f'Arquivo Anexado(s): {attachment_filenames[:]}', className='text-success')
-
-
-

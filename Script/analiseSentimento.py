@@ -5,14 +5,11 @@ import pandas as pd
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
 from nltk.stem import WordNetLemmatizer
 from sklearn.preprocessing import LabelEncoder
-import pickle
 import re
-import string
 
 pd.set_option('display.max_columns', None)
 
@@ -64,7 +61,7 @@ X_test_counts = vectorizer.transform(X_test)
 y_pred = clf.predict(X_test_counts)
 
 # Imprimindo a acurácia do modelo
-print("Acurácia: ", round(accuracy_score(y_test, y_pred), 2))
+accuracy = round(accuracy_score(y_test, y_pred), 2)
 
 
 # Usando o modelo para classificar o sentimento de uma frase
