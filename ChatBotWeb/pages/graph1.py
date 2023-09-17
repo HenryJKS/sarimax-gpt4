@@ -4,7 +4,7 @@ import plotly.express as px
 from dash import dcc, html, callback, State, Input, Output
 import dash_bootstrap_components as dbc
 import dash
-from ChatBotWeb.chatAPI.ModelAPI import chat
+from ChatBotWeb.chatAPI.ModelAPI import chat_faturamento
 from ChatBotWeb.components import navbar
 from ChatBotWeb.query.queryFaturamento import df
 
@@ -21,6 +21,16 @@ dash.register_page(
     external_stylesheets=['assets/graph1.css'],
 )
 
+fig = px.line(data, x="Ano", y="Faturamento", color='Modelo')
+fig.update_layout({
+            'plot_bgcolor': '#d6ecfd',
+            'paper_bgcolor': '#d6ecfd',
+            'font': {
+                'size': 12,
+                'color': 'black'
+            },
+        })
+
 layout = dbc.Container([
 
     dbc.Row([
@@ -28,7 +38,7 @@ layout = dbc.Container([
     ]),
 
     html.Div([
-        html.H2("Faturamento por Ano", className='text-center mt-2'),
+        html.H2("Faturamento Veículo", className='text-center mt-2'),
     ]),
 
     html.Hr(),
@@ -71,11 +81,14 @@ layout = dbc.Container([
 
     html.Div([
         dcc.Graph(
-            figure=px.bar(data, x='Ano', y='Faturamento', color='Faturamento', barmode='group', ), id='graph')
-    ], className="justify-content-center", style={'width': '80%', 'margin': 'auto'}),
+            figure=fig,
+            id='graph1',
+            className='border border-primary',
+            style={'width': '100%', 'height': '100%', 'border-radius': '5px'},
+            ),
+    ], className="justify-content-center",
+        style={'width': '80%', 'margin': 'auto'}),
 
-    # html.Div([
-    # ], id='valores'),
 ], fluid=True, style={'background-color': '#e8f5ff', 'height': '100%'})
 
 
@@ -106,7 +119,7 @@ def create_response(n_clicks, question):
                       style={'padding': '10px'})
 
     # Gerando resposta
-    resposta = chat('Ano: ' + str(data['Ano']) + 'Faturamento: ' + str(data['Faturamento']) + str(question))
+    resposta = chat_faturamento(f"dados: {str(df)}, pergunta: {str(question)}")
 
     # Retornando para os Outputs
     return (
