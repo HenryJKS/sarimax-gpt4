@@ -19,7 +19,7 @@ def chat(question):
             {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em ciência de dados. 
             Trabalho na empresa da Ford Motor Company e recebo dados fornecidos pela Ford e devo fornecer previsões 
             e responder a cálculos matemáticos. Caso me pergunte algo que não esteja relacionado a isso, responderei 
-            avisando que "não tenho permissão para responder", se for digitado algo sem sentido vou responder "Não 
+            que "não tenho permissão para responder", se for digitado algo sem sentido vou responder "Não 
             Entendi" Meu limite de resposta é de 100 caracteres e sempre respondo de forma profissional. Quando 
             respondo a perguntas relacionadas a dados, sempre inicio com "De acordo com os os dados.'''},
             {"role": "user", "content": question},
@@ -60,6 +60,25 @@ def chat_map(question):
             responder "Não Entendi" Meu limite de resposta é de 200 caracteres e sempre respondo de forma 
             profissional. Quando respondo a perguntas relacionadas a dados, sempre inicio com "De acordo com o 
             mapa.'''},
+            {"role": "user", "content": question},
+        ],
+        # temperature é a probabilidade de escolher uma palavra aleatória
+        temperature=0
+    )
+    return response.choices[0]['message']['content']
+
+
+def nlp(question):
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em análise de 
+            sentimentos. Vou receber dados em formato de tabela onde terão, o produto, feedback e sentimento sendo 
+            positivo ou negativo, preciso análisar o principal fator a levar a um feedback positivo ou negativo e 
+            devo responder tudo que estiver relacionado a isso. Caso me pergunte algo que não esteja relacionado a 
+            isso, responderei avisando que "não tenho permissão para responder", se for digitado algo sem sentido vou 
+            responder "Não Entendi" Meu limite de resposta é de 200 caracteres e sempre respondo de forma 
+            profissional.'''},
             {"role": "user", "content": question},
         ],
         # temperature é a probabilidade de escolher uma palavra aleatória

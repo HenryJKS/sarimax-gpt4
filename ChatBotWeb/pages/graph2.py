@@ -8,9 +8,6 @@ from ChatBotWeb.chatAPI.ModelAPI import chat
 from ChatBotWeb.components import navbar
 import openpyxl
 
-dataframe_gpt = None
-
-# Variável global para armazenar o DataFrame carregado
 
 NAVBAR = navbar.create_navbar()
 
@@ -85,11 +82,23 @@ layout = dbc.Container([
         className='mb-4',
         style={"minHeight": "100px"},
     ),
+
+    dcc.Store(id='dataframe-store', storage_type='memory')
 ], fluid=True, style={'background-color': '#e8f5ff', 'height': '100%'})
 
 
-def parse_contents(contents, filename, date):
-    global dataframe_gpt
+@callback(
+    Output("horizontal-collapse-export", "is_open"),
+    [Input("horizontal-collapse-button-export", "n_clicks")],
+    [State("horizontal-collapse-export", "is_open")],
+)
+def toggle_collapse(n, is_open):
+    if n:
+        return not is_open
+    return is_open
+
+
+def parse_contents(contents, filename):
     content_type, content_string = contents.split(',')
 
     decoded = base64.b64decode(content_string)
@@ -105,12 +114,25 @@ def parse_contents(contents, filename, date):
             f'Erro ao processar arquivo, erro: {e}'
         ])
 
-    dataframe_gpt = df
+    return df
+
+
+@callback(Output('output-data-upload', 'children'),
+          Input('upload-data', 'contents'),
+          State('upload-data', 'filename'))
+def update_output(list_of_contents, list_of_names):
+    if list_of_contents is not None:
+        children = [
+            create_table(parse_contents(c, n)) for c, n in
+            zip(list_of_contents, list_of_names)]
+        return children
+
+
+def create_table(df):
+    if df is None:
+        return dash.no_update
 
     return html.Div([
-        html.H5('Arquivo: ' + filename),
-        # html.H6(datetime.datetime.fromtimestamp(date)),
-
         dash_table.DataTable(
             df.to_dict('records'),
             [{'name': i, 'id': i} for i in df.columns],
@@ -130,28 +152,33 @@ def parse_contents(contents, filename, date):
             page_size=10,
             export_format='xlsx',
         ),
-
         html.Hr(),
     ], className='mt-2')
 
-
 @callback(
-    Output("horizontal-collapse-export", "is_open"),
-    [Input("horizontal-collapse-button-export", "n_clicks")],
-    [State("horizontal-collapse-export", "is_open")],
+    Output('dataframe-store', 'data'),
+    Input('upload-data', 'contents'),
+    State('upload-data', 'filename')
 )
-def toggle_collapse(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+def store_data(list_of_contents, list_of_names):
+    if list_of_contents is not None:
+        dataframes = [
+            parse_contents(c, n) for c, n in
+            zip(list_of_contents, list_of_names)]
+        # Aqui estamos assumindo que você quer armazenar todos os DataFrames carregados.
+        # Se você quiser armazenar apenas o primeiro, você pode retornar dataframes[0].to_dict('records')
+        return [df.to_dict('records') for df in dataframes if df is not None]
+
+    return dash.no_update
 
 
 @callback(
     Output('resposta-export', 'children'),
     Input('send-response-export', 'n_clicks'),
     State('question-export', 'value'),
+    State('dataframe-store', 'data')
 )
-def create_response(n_clicks, question):
+def create_response(n_clicks, question, dataframe_store):
     if not n_clicks:
         return dash.no_update
 
@@ -160,22 +187,12 @@ def create_response(n_clicks, question):
     if question is None:
         return html.P("Insira uma pergunta ")
 
+    # acessando o dataframe
+    df = pd.DataFrame(dataframe_store)
     # Gerando resposta
-    resposta = chat('dados: ' + str(dataframe_gpt) + str(question))
+    resposta = chat('dados: ' + str(df) + str(question))
 
     # Retornando para os Outputs
     return html.Div([
-        html.P(resposta, className='font-weight-light')
+        html.P(resposta, className='font-weight-light', style={'padding': '2%'})
     ], className='text-center border border-dark rounded'),
-
-
-@callback(Output('output-data-upload', 'children'),
-          Input('upload-data', 'contents'),
-          State('upload-data', 'filename'),
-          State('upload-data', 'last_modified'))
-def update_output(list_of_contents, list_of_names, list_of_dates):
-    if list_of_contents is not None:
-        children = [
-            parse_contents(c, n, d) for c, n, d in
-            zip(list_of_contents, list_of_names, list_of_dates)]
-        return children

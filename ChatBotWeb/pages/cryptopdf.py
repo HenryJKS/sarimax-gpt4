@@ -18,13 +18,24 @@ dash.register_page(
 )
 
 layout = dbc.Container([
+    html.Link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'),
+    html.Link(rel='stylesheet',
+              href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'),
+
     dbc.Row([
         NAVBAR
     ]),
 
     html.Div([
         html.H2('FordBot Security', className='text-center mt-2'),
-    ]),
+        html.A(
+            html.I(className='fa fa-question-circle', style={'color': '#103d82ff', 'font-size': '25px'}),
+            id='my-icon-security',
+            href='#',
+            style={'position': 'absolute', 'right': '0', 'top': '50%', 'transform': 'translateY(-50%)'}
+        ),
+    ], style={'position': 'relative', 'text-align': 'center'}),
+
 
     html.Div([
         html.Hr()
@@ -129,3 +140,30 @@ def pdf_list(filename):
             html.P(f'Arquivo Selecionado: {filename}', className='text-info mt-2', style={'text-height': '100px'})
         ])
 
+@callback(Output('my-icon-security', 'children'),
+            Input('my-icon-security', 'n_clicks'))
+def info(n_clicks):
+    if n_clicks is None:
+        return dash.no_update
+    else:
+        return html.A(
+            html.I(className="fa fa-question-circle", style={'color': '#103d82ff', 'font-size': '25px'}),
+            id='my-icon-security',
+            href='#',
+        ), dbc.Modal(
+            [
+                dbc.ModalHeader("Informações"),
+                dbc.ModalBody(
+                    html.P('''
+                        Este é um módulo de criptografia de arquivos PDF, para criptografar um arquivo PDF,
+                        basta selecionar o arquivo e inserir uma senha, após isso, clique no botão "Crypt" e
+                        o arquivo será criptografado. Para visualizar o arquivo criptografado.
+                    ''')
+                ),
+                dbc.ModalFooter(
+                ),
+            ],
+            id="modal",
+            is_open=True,
+            centered=True,
+        )
