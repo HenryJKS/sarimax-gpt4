@@ -11,10 +11,10 @@ def create_navbar():
                 dbc.Nav(
                     [
                         dbc.NavItem(dbc.NavLink("Home", active=True, href="/")),
-                        dbc.NavItem(dbc.NavLink("Graph", href="/graph1")),
-                        dbc.NavItem(dbc.NavLink("Graph2", href="/graph2")),
-                        dbc.NavItem(dbc.NavLink("Graph3", href="/graph3")),
-                        dbc.NavItem(dbc.NavLink("Graph4", href="/graph4")),
+                        dbc.NavItem(dbc.NavLink("Análise Financeira", href="/graph1")),
+                        dbc.NavItem(dbc.NavLink("Análise Geral", href="/graph2")),
+                        dbc.NavItem(dbc.NavLink("Assistencia Veículo", href="/graph3")),
+                        dbc.NavItem(dbc.NavLink("Mapa", href="/graph4")),
                         dbc.DropdownMenu(
                             [
                                 dbc.DropdownMenuItem("Enviar Email", href="/sendEmail"),
@@ -23,7 +23,7 @@ def create_navbar():
                                 dbc.DropdownMenuItem("FordBot NLP", href="/feedback"),
                                 dbc.DropdownMenuItem("FordBot Security", href="/crypto"),
                             ],
-                            label="Opções",
+                            label="Utils",
                             nav=True,
                         ),
                     ],
