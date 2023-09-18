@@ -1,17 +1,18 @@
 import dash
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
+from dash.exceptions import PreventUpdate
+
 from ChatBotWeb.components import navbar
 import os
-import base64
-import pandas as pd
-import pythoncom
-from docx2pdf import convert
 
-from Script.helpers import docx_to_pdf, delete_dir
+from Script.helpers import docx_to_pdf, pdf_to_docx, download_pdf, delete_files
+
+app = dash.Dash(__name__, use_pages=False, external_stylesheets=[dbc.themes.LITERA], title='FordBot')
 
 NAVBAR = navbar.create_navbar()
 
+'''
 dash.register_page(
     __name__,
     name='conversionFiles',
@@ -19,8 +20,9 @@ dash.register_page(
     path='/conversion',
     external_stylesheets=[dbc.themes.LITERA]
 )
+'''
 
-layout = html.Div([
+app.layout = html.Div([
     # Navbar
     dbc.Row([
         NAVBAR
@@ -32,20 +34,19 @@ layout = html.Div([
     html.Hr(),
 
     # Selecionar tipo de arquivo
-    html.Div(
-        dbc.ButtonGroup(
-            dbc.DropdownMenu(
-                [
-                    dbc.DropdownMenuItem('PDF to Docx', id='pdf_to_docx', key=1),
-                    dbc.DropdownMenuItem('Docx to PDF', id='docx_to_pdf', key=2),
-                ],
-                label="Selecione o tipo de conversão",
-                group=True,
+    dbc.Row(
+        dbc.Col(
+            dcc.Dropdown(
                 id='select_conversion',
+                options=[
+                    {'label': 'PDF para Docx', 'value': 'DOCX'},
+                    {'label': 'Docx para PDF', 'value': 'PDF'}
+                ],
+                className="custom-dropdown",  # Classe CSS personalizada
+                style={'width': '200px'},  # Largura personalizada
             ),
-            className="justify-content-center",
-        ),
-        style={"display": "flex, w"},
+            className="mt-3"
+        )
     ),
 
     html.Hr(),
@@ -69,41 +70,38 @@ layout = html.Div([
         html.Button("Baixar arquivo", id="btn-download-txt", className="btn btn-primary"),
         dcc.Download(id='download-pdf-converted'),
     ], className="text-center mt-3"),
+    html.Div(id='download-data-info'),
 ])
 
 
-@callback(
+@app.callback(
     Output('selected_file', 'children'),
     [
-        Input('pdf_to_docx', 'n_clicks'),
-        Input('docx_to_pdf', 'n_clicks'),
+        Input('select_conversion', 'value'),
     ]
 )
-def transform_files(a1, a2):
+def select_conversion_type(value):
     ctx = dash.callback_context
+    msg = ''
 
     if not ctx.triggered:
         return ''
     else:
-        item_id = ctx.triggered[0]["prop_id"].split(".")[0]
+        if value == 'DOCX':
+            msg = 'pdf_to_docx'
+        elif value == 'PDF':
+            msg = 'docx_to_pdf'
+        return html.Div(msg)
 
-        if item_id == "pdf_to_docx":
-            return 'pdf_to_docx'
-        elif item_id == 'docx_to_pdf':
-            return 'docx_to_pdf'
 
-
-@callback(
+@app.callback(
     Output('output-data-upload-info', 'children'),
     [
-        Input('upload-data', 'contents'),
         Input('upload-data', 'filename')
-    ]
+    ],
 )
-def display_and_convert_to_pdf(content, filename):
-    if content is not None and filename is not None:
-
-        docx_to_pdf(content, filename)
+def update_display(filename):
+    if filename is not None:
 
         return [
             html.Div(f"Arquivo carregado: {filename}"),
@@ -112,20 +110,35 @@ def display_and_convert_to_pdf(content, filename):
         return ''
 
 
-@callback(
-    Output('download-pdf-converted', 'data'),
-    Input('btn-download-txt', 'n_clicks'),
+@app.callback(
+    Output('download-data-info', 'children'),
+    [
+        Input('btn-download-txt', 'n_clicks'),
+        Input('select_conversion', 'value'),
+        Input('upload-data', 'contents'),
+        Input('upload-data', 'filename')
+    ],
     prevent_initial_call=True,
 )
-def download_pdf(n_clicks):
-    temp_dir = 'temp_dir'
-    files = os.listdir(temp_dir)
+def convert_to_pdf(n_clicks, option, content, filename):
+    if n_clicks is None:
+        return ''
 
-    pdfs = [file for file in files if file.lower().endswith('.pdf')]
-    if pdfs:
-        for pdf in pdfs:
-            pdf_path = f'{temp_dir}/{pdf}'
+    msg = ''
 
-            with open(pdf_path, "rb") as pdf_file:
-                pdf_data = pdf_file.read()
-                return dcc.send_bytes(pdf_data, filename=pdf_path)
+    if option is not None and content is not None and filename is not None:
+        if option == 'PDF':
+            docx_to_pdf(content, filename)
+
+            download_pdf()
+            msg = 'PDF baixado com sucesso!'
+        elif option == 'DOCX':
+            pdf_to_docx(content, filename)
+        delete_files()
+        return html.Div(msg)
+    else:
+        raise PreventUpdate
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
