@@ -10,7 +10,6 @@ import os
 
 from Script.helpers import docx_to_pdf, pdf_to_docx, download_pdf, delete_files
 
-app = dash.Dash(__name__, use_pages=False, external_stylesheets=[dbc.themes.LITERA], title='FordBot')
 NAVBAR = navbar.create_navbar()
 
 dash.register_page(
@@ -21,7 +20,7 @@ dash.register_page(
     external_stylesheets=['assets/conversionFiles.css']
 )
 
-app.layout = html.Div([
+layout = html.Div([
     # Navbar
     dbc.Row([
         NAVBAR
@@ -75,7 +74,7 @@ app.layout = html.Div([
 ])
 
 
-@app.callback(
+@callback(
     Output('selected_file', 'children'),
     [
         Input('select_conversion', 'value'),
@@ -95,7 +94,7 @@ def select_conversion_type(value):
         return html.Div(msg)
 
 
-@app.callback(
+@callback(
     Output('output-data-upload-info', 'children'),
     [
         Input('select_conversion', 'value'),
@@ -112,7 +111,7 @@ def update_display(option, filename):
         return ''
 
 
-@app.callback(
+@callback(
     Output('upload-data', 'disabled'),  # Atualiza a propriedade 'disabled' do componente upload-data
     Input('select_conversion', 'value')
 )
@@ -121,7 +120,7 @@ def update_upload_data_availability(selected_option):
     return selected_option is None
 
 
-@app.callback(
+@callback(
     Output('convert-data-info', 'children'),
     [
         Input('select_conversion', 'value'),
@@ -147,7 +146,7 @@ def convert_files(option, content, filename):
         raise PreventUpdate
 
 
-@app.callback(
+@callback(
     Output('download-data-info', 'children'),
     Input('btn-download-txt', 'n_clicks'),
     State('convert-data-info', 'children')
@@ -169,6 +168,3 @@ def download_file(n_clicks, convert_data_info):
     else:
         return html.Div('Nenhum PDF encontrado para download')
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
