@@ -1,13 +1,10 @@
 import re
-
 import dash
 from dash import html, dcc, callback, Input, Output, State
 import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
-
 from ChatBotWeb.components import navbar
 import os
-
 from Script.helpers import docx_to_pdf, pdf_to_docx, download_pdf, delete_files
 
 app = dash.Dash(__name__, use_pages=False, external_stylesheets=[dbc.themes.LITERA], title='FordBot')
@@ -22,7 +19,7 @@ dash.register_page(
     external_stylesheets=['assets/conversionFiles.css']
 )
 
-app.layout = html.Div([
+layout = html.Div([
     # Navbar
     dbc.Row([
         NAVBAR

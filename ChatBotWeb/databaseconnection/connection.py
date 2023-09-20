@@ -1,11 +1,8 @@
 import os
-
 import pandas as pd
 import mysql.connector as mysql
-
 from dotenv import load_dotenv
 load_dotenv()
-
 DATABASE = os.getenv('DATABASE')
 USER = os.getenv('USER')
 PASSWORD = os.getenv('PASSWORD')
@@ -17,7 +14,8 @@ def mysql_query(query):
         'database': DATABASE,
         'user': USER,
         'password': PASSWORD,
-        'host': HOST
+        'host': HOST,
+        'port': 3306
     }
 
     connection = mysql.connect(**db_params)
