@@ -45,7 +45,7 @@ layout = dbc.Container([
 
     html.Div([
         dbc.Button(
-            "Fordbot",
+            "Fordbot Finanças",
             id="horizontal-collapse-button",
             color="primary",
             n_clicks=0,

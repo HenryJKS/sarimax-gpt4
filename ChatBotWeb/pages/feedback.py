@@ -81,7 +81,7 @@ layout = dbc.Container([
 
     html.Div([
         html.Div([
-            dbc.Button("FordBot", id="opencanvasnlp", n_clicks=0),
+            dbc.Button("FordBot ML", id="opencanvasnlp", n_clicks=0),
             dbc.Offcanvas(
                 html.Div([
                     html.H4('Converse com o Bot', className='text-center'),
