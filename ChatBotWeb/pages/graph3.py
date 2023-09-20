@@ -37,11 +37,11 @@ layout = dbc.Container([
 
     html.Div([
         html.Div([
-            html.P('Selecione o veículo: '),
+            html.P('Selecione o Cliente: '),
             dcc.Dropdown(
                 id='modelo-dropdown',
-                options=[{'label': modelo, 'value': modelo} for modelo in df['MODELO'].unique()],
-                value=df['MODELO'][0],
+                options=[{'label': cliente, 'value': cliente} for cliente in df['CLIENTE'].unique()],
+                value=df['CLIENTE'][0],
                 multi=False,
             ),
         ], style={'width': '25%'}),
@@ -99,11 +99,13 @@ def update_problemas_card(selected_modelo):
     if selected_modelo is None:
         return ''
 
-    problemas_modelo = df[df['MODELO'] == selected_modelo]['PROBLEMA'].unique()
+    problemas_modelo = df[df['CLIENTE'] == selected_modelo]['PROBLEMA'].unique()
 
-    cliente = df[df['MODELO'] == selected_modelo]['CLIENTE'].unique()
+    cliente = df[df['CLIENTE'] == selected_modelo]['CLIENTE'].unique()
 
-    km_rodado = df[df['MODELO'] == selected_modelo]['KM'].unique()
+    km_rodado = df[df['CLIENTE'] == selected_modelo]['KM'].unique()
+
+    modelo = df[df['CLIENTE'] == selected_modelo]['MODELO'].unique()
 
     problemas_lista = problemas_modelo.tolist()
 
@@ -113,7 +115,7 @@ def update_problemas_card(selected_modelo):
     return dbc.Card([
         dbc.CardHeader('Relatório do Modelo'),
         dbc.CardBody([
-            html.P(f'Modelo: {selected_modelo}'),
+            html.P(f'Modelo: {modelo[0]}'),
             html.P(f'Problemas Encontrados: {problemas_texto}'),
             html.P(f'Cliente: {cliente[0]}'),
             html.P(f'Quilometragem: {km_rodado[0]}km')
@@ -161,7 +163,7 @@ def response(n_clicks, question, data):
 )
 def download_pdf(n_clicks, selected_modelo, selected_options, chatlog):
     if n_clicks and selected_modelo:
-        filtered_df = df[df['MODELO'] == selected_modelo]
+        filtered_df = df[df['CLIENTE'] == selected_modelo]
         selected_data = [f"{option['label']}: {option['value']}" for option in selected_options]
         filename = f"pdf\\relatorio_{selected_modelo}.pdf"
         create_pdf(filtered_df, filename, chatlog, selected_data)  # Passe os dados selecionados
