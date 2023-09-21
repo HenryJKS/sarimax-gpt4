@@ -36,7 +36,6 @@ layout = dbc.Container([
         ),
     ], style={'position': 'relative', 'text-align': 'center'}),
 
-
     html.Div([
         html.Hr()
     ]),
@@ -62,14 +61,13 @@ layout = dbc.Container([
     ),
 
     dbc.InputGroup([
-            dcc.Input(
-                id='pdf-password',
-                type='password',
-                placeholder='Senha',
-            ),
-            html.Button('Crypt', id='submit-button', n_clicks=0, className='text-center btn btn-primary')
+        dcc.Input(
+            id='pdf-password',
+            type='password',
+            placeholder='Senha',
+        ),
+        html.Button('Crypt', id='submit-button', n_clicks=0, className='text-center btn btn-primary')
     ], className='mt-2'),
-
 
     html.Div([
 
@@ -140,8 +138,9 @@ def pdf_list(filename):
             html.P(f'Arquivo Selecionado: {filename}', className='text-info mt-2', style={'text-height': '100px'})
         ])
 
+
 @callback(Output('my-icon-security', 'children'),
-            Input('my-icon-security', 'n_clicks'))
+          Input('my-icon-security', 'n_clicks'))
 def info(n_clicks):
     if n_clicks is None:
         return dash.no_update
@@ -157,7 +156,7 @@ def info(n_clicks):
                     html.P('''
                         Este é um módulo de criptografia de arquivos PDF, para criptografar um arquivo PDF,
                         basta selecionar o arquivo e inserir uma senha, após isso, clique no botão "Crypt" e
-                        o arquivo será criptografado. Para visualizar o arquivo criptografado.
+                        o arquivo será criptografado.
                     ''')
                 ),
                 dbc.ModalFooter(
