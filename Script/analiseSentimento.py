@@ -78,6 +78,5 @@ def classificar_sentimento(df):
     # Criando coluna com o sentimento
     df['SENTIMENTO_PREDICT'] = df['SENTIMENTO_PREDICT'].apply(lambda x: 'Positivo' if x == 1 else 'Negativo')
 
-    #Retornando o dataframe
     return df[['VEICULO', 'FEEDBACK', 'SENTIMENTO_PREDICT']]
 

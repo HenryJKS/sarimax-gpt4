@@ -23,13 +23,13 @@ dash.register_page(
 
 fig = px.line(data, x="Ano", y="Faturamento", color='Modelo')
 fig.update_layout({
-            'plot_bgcolor': '#d6ecfd',
-            'paper_bgcolor': '#d6ecfd',
-            'font': {
-                'size': 12,
-                'color': 'black'
-            },
-        })
+    'plot_bgcolor': '#d6ecfd',
+    'paper_bgcolor': '#d6ecfd',
+    'font': {
+        'size': 12,
+        'color': 'black'
+    },
+})
 
 layout = dbc.Container([
 
@@ -44,40 +44,22 @@ layout = dbc.Container([
     html.Hr(),
 
     html.Div([
-        dbc.Button(
-            "Fordbot Finanças",
-            id="horizontal-collapse-button",
-            color="primary",
-            n_clicks=0,
-            style={}
+        dbc.Button("FordBot Finanças", id="open-offcanvas-finance", n_clicks=0, className='mb-2'),
+        dbc.Offcanvas(
+            html.Div([
+                html.H4('Converse com o Bot', className='text-center'),
+                html.Hr(),
+                html.H6('Faça sua pergunta:', className='mt-2'),
+                dcc.Textarea(style={'width': '100%'}, id='question-finance'),
+                html.Button('Perguntar', id='send-question-finance', className='btn btn-secondary'),
+                html.Div([
+                ], className='mt-4', id='responsefinance')
+            ]),
+            id="offcanvas-finance",
+            is_open=False,
+            placement='end'
         ),
-    ], className='mb-2'),
-    html.Div(
-        dbc.Collapse(
-            dbc.Card(
-                dbc.CardBody(
-                    html.Div([
-                        html.H6('Análise Gráfica: '),
-                        dbc.InputGroup([
-                            dbc.Input(id='question', type='text', placeholder='Pergunte ao Bot'),
-                            dbc.Button('Enviar', id='send-response', className='btn btn-primary btn-sm')
-                        ], className='mb-2'),
-
-                        html.Div([
-                        ], id='resposta')
-                    ], style={'width': '100%'}),
-                ),
-                className='background-1',
-                style={"width": "400px"},
-            ),
-            id="horizontal-collapse",
-            is_open=True,
-            dimension="width",
-            style={}
-        ),
-        className='mb-4',
-        style={"minHeight": "100px"},
-    ),
+    ]),
 
     html.Div([
         dcc.Graph(
@@ -85,7 +67,7 @@ layout = dbc.Container([
             id='graph1',
             className='border border-primary',
             style={'width': '100%', 'height': '100%', 'border-radius': '5px'},
-            ),
+        ),
     ], className="justify-content-center",
         style={'width': '80%', 'margin': 'auto'}),
 
@@ -93,20 +75,20 @@ layout = dbc.Container([
 
 
 @callback(
-    Output("horizontal-collapse", "is_open"),
-    [Input("horizontal-collapse-button", "n_clicks")],
-    [State("horizontal-collapse", "is_open")],
+    Output("offcanvas-finance", "is_open"),
+    Input("open-offcanvas-finance", "n_clicks"),
+    [State("offcanvas-finance", "is_open")],
 )
-def toggle_collapse(n, is_open):
-    if n:
+def toggle_offcanvas(n1, is_open):
+    if n1:
         return not is_open
     return is_open
 
 
 @callback(
-    Output('resposta', 'children'),
-    Input('send-response', 'n_clicks'),
-    State('question', 'value'),
+    Output('responsefinance', 'children'),
+    Input('send-question-finance', 'n_clicks'),
+    State('question-finance', 'value'),
 )
 def create_response(n_clicks, question):
     if not n_clicks:

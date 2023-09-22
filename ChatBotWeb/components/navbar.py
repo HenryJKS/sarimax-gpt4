@@ -14,7 +14,14 @@ def create_navbar():
                         dbc.NavItem(dbc.NavLink("Análise Financeira", href="/graph1")),
                         dbc.NavItem(dbc.NavLink("Análise Geral", href="/graph2")),
                         dbc.NavItem(dbc.NavLink("Assistencia Veículo", href="/graph3")),
-                        dbc.NavItem(dbc.NavLink("Mapa", href="/graph4")),
+                        dbc.DropdownMenu(
+                            [
+                                dbc.DropdownMenuItem("Veículos Ativos", href="/graph4"),
+                                dbc.DropdownMenuItem("Veículos Importados", href="/graph5"),
+                            ],
+                            label="Análise de Veículos",
+                            nav=True,
+                        ),
                         dbc.DropdownMenu(
                             [
                                 dbc.DropdownMenuItem("Enviar Email", href="/sendEmail"),
@@ -32,13 +39,6 @@ def create_navbar():
                 id="navbar-collapse",
                 navbar=True,
             ),
-            # dbc.Form(
-            #     [
-            #         dbc.Input(type="search", placeholder="Search"),
-            #         dbc.Button("Search", color="secondary"),
-            #     ],
-            #     className="form-inline d-flex",
-            # ),
         ],
         color="#103D82",
         dark=True,

@@ -42,7 +42,7 @@ layout = dbc.Container([
 
     html.Div([
         html.Div([
-            html.H2('Veículos Ativos no Brasil', className='text-center')
+            html.H2('Veículos Ativos em Tempo Real', className='text-center')
         ]),
 
         html.Div([
@@ -59,6 +59,7 @@ layout = dbc.Container([
                 ]),
                 id="offcanvas-map",
                 is_open=False,
+                placement='end'
             ),
         ], style={}),
     ], className='mt-2'),

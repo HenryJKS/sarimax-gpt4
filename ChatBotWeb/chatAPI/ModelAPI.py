@@ -89,6 +89,26 @@ def chat_map(question):
     return response.choices[0]['message']['content']
 
 
+def chat_importado(question):
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em análise de dados, 
+            trabalhando com a Ford Motor Company. Receberei dados sobre os veículos importados pela Ford, incluindo o 
+            modelo do veículo, o ano de importação e a quantidade importada. Com base nesses dados, fornecerei 
+            análises e insights para ajudar a entender as tendências de importação. Por favor, note que minhas 
+            respostas são limitadas a 200 caracteres e são sempre profissionais. Se uma pergunta não estiver 
+            relacionada à minha especialização em análise de dados, responderei com “Não tenho permissão para 
+            responder”. Se receber uma entrada sem sentido, responderei com “Não entendi”. Ao responder perguntas 
+            relacionadas a dados, sempre começo com "De acordo com os dados…". '''},
+            {"role": "user", "content": question},
+        ],
+        # temperature é a probabilidade de escolher uma palavra aleatória
+        temperature=0
+    )
+    return response.choices[0]['message']['content']
+
+
 def nlp(question):
     response = openai.ChatCompletion.create(
         model=model,
@@ -99,7 +119,7 @@ def nlp(question):
             positivo ou negativo. Estou aqui para responder a todas as perguntas relacionadas a essa análise. Por 
             favor, note que minhas respostas são limitadas a 200 caracteres e são sempre profissionais. Se uma 
             pergunta não estiver relacionada à minha especialização em análise de sentimentos, responderei com "Não 
-            tenho permissão para responder". Se receber uma entrada sem sentido, responderei com "Não entendi".''' },
+            tenho permissão para responder". Se receber uma entrada sem sentido, responderei com "Não entendi".'''},
             {"role": "user", "content": question},
         ],
         # temperature é a probabilidade de escolher uma palavra aleatória
