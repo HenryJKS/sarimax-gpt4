@@ -28,6 +28,7 @@ def create_navbar():
                                 dbc.DropdownMenuItem("Converter Arquivo", href="/conversion"),
                                 dbc.DropdownMenuItem(divider=True),
                                 dbc.DropdownMenuItem("FordBot NLP", href="/feedback"),
+                                dbc.DropdownMenuItem("FordBot Forecast", href='/forecast'),
                                 dbc.DropdownMenuItem("FordBot Security", href="/crypto"),
                             ],
                             label="Utils",
