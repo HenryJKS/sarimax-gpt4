@@ -1,11 +1,13 @@
 import dash
 from dash import Output, Input, dcc, State, callback, html
 import dash_bootstrap_components as dbc
+import pandas as pd
 from ChatBotWeb.components import navbar
 import plotly.express as px
 from ChatBotWeb.query.queryModeloImportado import df
 from ChatBotWeb.chatAPI.ModelAPI import chat_importado
-
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
 NAVBAR = navbar.create_navbar()
 
 dash.register_page(
@@ -49,8 +51,9 @@ html.Div([
 
     html.Div([
         dcc.Graph(
-            figure=px.bar(df, x="Modelo", y="Importado", animation_frame="Ano", color="Modelo",
-                          hover_name="Modelo", range_y=[0, df['Importado'].max()])
+            figure=px.bar(df, x="Modelo", y="Unidades_Importada", animation_frame="Ano", color="Modelo",
+                          hover_name="Modelo", range_y=[0, df['Unidades_Importada'].max()],
+                          labels={'Modelo': 'Modelo', 'Unidades_Importada': 'Unidades Importadas', 'Ano': 'Ano'})
             , className='border border-primary',
             style={'width': '100%', 'height': '100%', 'border-radius': '5px'})
     ], className="justify-content-center",
@@ -69,7 +72,7 @@ def response(n_clicks, question):
     elif n_clicks is None:
         return dash.no_update
 
-    resposta = chat_importado(f'dados: {df}, pergunta: {question}')
+    resposta = chat_importado(f'dados: {str(df)}, pergunta: {str(question)}')
 
     if question is None:
         return (

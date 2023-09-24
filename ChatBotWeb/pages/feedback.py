@@ -8,6 +8,8 @@ import base64
 import plotly.express as px
 from Script.analiseSentimento import classificar_sentimento, accuracy
 from ChatBotWeb.chatAPI.ModelAPI import nlp
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
 import openpyxl
 
 NAVBAR = navbar.create_navbar()
@@ -185,6 +187,7 @@ def update_graph(contents, filename):
                 'overflowY': 'auto',
             },
             page_size=10,
+            export_format='xlsx'
         )
 
         return (html.Div(dcc.Graph(figure=fig, className='border border-primary'), style={'border-radius': '5px',

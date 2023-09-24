@@ -1,5 +1,4 @@
-import time
-
+import pandas as pd
 import plotly.express as px
 from dash import dcc, html, callback, State, Input, Output
 import dash_bootstrap_components as dbc
@@ -7,7 +6,8 @@ import dash
 from ChatBotWeb.chatAPI.ModelAPI import chat_faturamento
 from ChatBotWeb.components import navbar
 from ChatBotWeb.query.queryFaturamento import df
-
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
 data = df
 data['Ano'] = data['Ano'].astype(str)
 

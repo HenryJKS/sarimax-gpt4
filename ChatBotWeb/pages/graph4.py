@@ -5,6 +5,9 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 from ChatBotWeb.query import queryVeiulosAtivos
 from ChatBotWeb.chatAPI.ModelAPI import chat_map
+import pandas as pd
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
 
 df_map = queryVeiulosAtivos.df
 df_gpt = queryVeiulosAtivos.df_gpt

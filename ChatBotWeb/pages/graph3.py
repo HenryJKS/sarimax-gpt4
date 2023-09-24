@@ -7,12 +7,13 @@ from ChatBotWeb.components import navbar
 from ChatBotWeb.query.queryVeiculoProblema import df
 from ChatBotWeb.chatAPI.ModelAPI import chat_analise_veiculo
 from Script.geradorRelatorio import create_pdf
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
 
 NAVBAR = navbar.create_navbar()
 
 chat_log = []
 
-pd.set_option('display.max_columns', None)
 
 dash.register_page(
     __name__,
