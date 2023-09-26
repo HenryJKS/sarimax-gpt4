@@ -558,3 +558,55 @@ FROM (
     SELECT 10 UNION ALL
     SELECT 11
 ) months;
+
+CREATE TABLE CARROS_ELETRICO(
+ID INTEGER AUTO_INCREMENT PRIMARY KEY,
+MARCA VARCHAR(100),
+UNIDADES_VENDIDAS INTEGER,
+AUTONOMIA VARCHAR(100),
+MARCA_CONHECIDA BIT,
+INCENTIVOS_FISCAIS BIT,
+ACESSIVEL BIT,
+ANO INTEGER
+);
+
+-- Baixa autonomia: Menos de 150 km
+-- Média autonomia: Entre 150 e 300 km
+-- Alta autonomia: Mais de 300 km
+
+DROP TABLE CARROS_ELETRICO;
+
+INSERT INTO CARROS_ELETRICO(MARCA, UNIDADES_VENDIDAS, AUTONOMIA, MARCA_CONHECIDA, INCENTIVOS_FISCAIS, ACESSIVEL, ANO)
+VALUES
+('Volvo', 2354, 'Baixa', 1, 0, 0, 2022),
+('Renault', 1999, 'Media',1, 1,1, 2022),
+('Caoa Chery', 782, 'Media', 0, 1, 1, 2022),
+('BMW', 539, 'Alta', 1, 0, 0, 2022),
+('FORD', 1557, 'Alta', 1, 1, 0, 2022);
+-- Baixa autonomia: Menos de 150 km
+-- Média autonomia: Entre 150 e 300 km
+-- Alta autonomia: Mais de 300 km
+
+
+INSERT INTO CARROS_ELETRICO(MARCA, UNIDADES_VENDIDAS, AUTONOMIA, MARCA_CONHECIDA, INCENTIVOS_FISCAIS, ACESSIVEL, ANO)
+VALUES
+('Volvo', 2354, 'Baixa', 1, 0, 0, 2022),
+('Renault', 1999, 'Media',1, 1,1, 2022),
+('Caoa Chery', 782, 'Media', 0, 1, 1, 2022),
+('BMW', 539, 'Alta', 1, 0, 0, 2022),
+('Ford', 1557, 'Alta', 1, 1, 0, 2022),
+('Volvo', 801, 'Baixa', 1, 0, 0, 2021),
+('Renault', 645, 'Média', 1, 1, 1, 2021),
+('Caoa Chery', 228, 'Média', 0, 1, 1, 2021),
+('BMW', 165, 'Alta', 1, 0, 0, 2021),
+('Ford', 483, 'Alta', 1, 1, 0, 2021),
+('Volvo', 603, 'Baixa', 1, 0, 0, 2020),
+('Renault', 485, 'Média', 1, 1, 1, 2020),
+('Caoa Chery', 102, 'Média', 0, 1, 1, 2020),
+('BMW', 84, 'Alta', 1, 0, 0, 2020),
+('Ford', 250, 'Alta', 1, 1, 0, 2020),
+('Volvo', 492, 'Baixa', 1, 0, 0, 2020),
+('Renault', 204, 'Média', 1, 1, 1, 2020),
+('Caoa Chery', 57, 'Média', 0, 1, 1, 2020),
+('BMW', 25, 'Alta', 1, 0, 0, 2020),
+('Ford', 120, 'Alta', 1, 1, 0, 2020);
