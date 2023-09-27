@@ -63,6 +63,17 @@ y_pred = clf.predict(X_test_counts)
 # Imprimindo a acurácia do modelo
 accuracy = round(accuracy_score(y_test, y_pred), 2)
 
+# R2
+r2 = round(clf.score(X_test_counts, y_test), 2)
+
+# RMSE
+rmse = round(np.sqrt(np.mean((y_test - y_pred) ** 2)), 2)
+
+# MAE
+mae = round(np.mean(np.abs(y_test - y_pred)), 2)
+
+
+
 
 # Usando o modelo para classificar o sentimento de uma frase
 def classificar_sentimento(df):

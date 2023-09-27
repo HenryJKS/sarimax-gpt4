@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 from ChatBotWeb.components import navbar
 import base64
 import plotly.express as px
-from Script.analiseSentimento import classificar_sentimento, accuracy
+from Script.analiseSentimento import classificar_sentimento, accuracy, rmse, mae
 from ChatBotWeb.chatAPI.ModelAPI import nlp
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -68,8 +68,11 @@ layout = dbc.Container([
 
     html.Div([
         html.Div([
-            html.H5(f'Machine Learning Accuracy ≅ {accuracy * 100}% ', className='mt-2', style={'color': '#103d82ff'}),
-        ]),
+            html.H5(f'Avaliação Machine Learning', style={'color': '#103d82ff'}),
+            html.H5(f'Acurácia(R²) ≅ {accuracy * 100}%', style={'color': '#103d82ff'}),
+            html.H5(f'RMSE ≅ {rmse}', style={'color': '#103d82ff'}),
+            html.H5(f'MAE ≅ {mae}',  style={'color': '#103d82ff'}),
+        ], style={'text-align': 'start', 'border-radius': '5px', 'box-shadow': '0px 0px 5px 0px #103D82', 'padding': '1%'}),
 
         html.Div([
 
