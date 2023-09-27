@@ -15,3 +15,4 @@ pd.set_option('display.max_columns', None)
 # SARIMAX é uma extensão do modelo ARIMA para dados não sazonais
 # ARIMA - AutoRegressive Integrated Moving Average
 
+df.to_csv('C:\\Users\\Henry\\Desktop\\dados.csv', index=True)
