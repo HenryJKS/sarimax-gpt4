@@ -40,3 +40,7 @@ df = df.set_index('ANO')
 
 # renomear coluna ALTA, BAIXA, MEDIA para AUTONOMIA_ALTA, AUTONOMIA_BAIXA, AUTONOMIA_MEDIA
 df = df.rename(columns={'Alta': 'AUTONOMIA_ALTA', 'Baixa': 'AUTONOMIA_BAIXA', 'Media': 'AUTONOMIA_MEDIA'})
+
+# Selecionar somente Marca Ford
+df = df.loc[df['MARCA'] == 'Ford']
+

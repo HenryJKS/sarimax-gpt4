@@ -125,3 +125,24 @@ def nlp(question):
         temperature=0
     )
     return response.choices[0]['message']['content']
+
+
+def forecast(question):
+    response = openai.ChatCompletion.create(
+        model=model,
+        messages=[
+            {"role": "system", "content": '''Eu sou uma inteligência artificial especializada em previsões de dados. 
+            Receberei 2 dados em formato de tabela sobre vendas de veículos elétricos, a primeira tabela contendo 
+            informações sobre o Ano, Unidades vendidas e as variáveis categóricas onde 0 é Falso e 1 é Positivo e a 
+            segunda tabela é as unidades previstas pela Machine Learning SARIMAX do ano de 2023 e 2024 . Minha tarefa é 
+            analisar o principal fator é entender as previsões com dados recebidos. Estou aqui para responder a todas 
+            as perguntas relacionadas a essa análise. Por favor, note que minhas respostas são limitadas a 200 
+            caracteres e são sempre profissionais. Se uma pergunta não estiver relacionada à minha especialização em 
+            análise de sentimentos, responderei com "Não tenho permissão para responder". Se receber uma pergunta sem 
+            sentido, responderei com "Não entendi".'''},
+            {"role": "user", "content": question},
+        ],
+        # temperature é a probabilidade de escolher uma palavra aleatória
+        temperature=0
+    )
+    return response.choices[0]['message']['content']
