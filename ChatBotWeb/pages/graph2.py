@@ -7,6 +7,7 @@ import dash_bootstrap_components as dbc
 from ChatBotWeb.chatAPI.ModelAPI import chat
 from ChatBotWeb.components import navbar
 import openpyxl
+
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
@@ -103,19 +104,12 @@ def parse_contents(contents, filename):
     content_type, content_string = contents.split(',')
 
     decoded = base64.b64decode(content_string)
-    try:
-        if 'csv' in filename:
-            df = pd.read_csv(
-                io.StringIO(decoded.decode('latin-1', errors='ignore')))
-        elif 'xls' in filename:
-            df = pd.read_excel(io.BytesIO(decoded))
-    except Exception as e:
-        print(e)
-        return html.Div([
-            f'Erro ao processar arquivo, erro: {e}'
-        ])
-
-    return df
+    if filename.lower().endswith('.xlsx'):
+        df = pd.read_excel(io.BytesIO(decoded), engine='openpyxl')
+        return df
+    elif filename.lower().endswith('.csv'):
+        df = pd.read_csv(io.StringIO(decoded.decode('latin-1')))
+        return df
 
 
 @callback(Output('output-data-upload', 'children'),
@@ -156,6 +150,7 @@ def create_table(df):
         html.Hr(),
     ], className='mt-2')
 
+
 @callback(
     Output('dataframe-store', 'data'),
     Input('upload-data', 'contents'),
@@ -188,10 +183,13 @@ def create_response(n_clicks, question, dataframe_store):
     if question is None:
         return html.P("Insira uma pergunta ")
 
+    flattened_data = [item for sublist in dataframe_store for item in sublist]
+
     # acessando o dataframe
-    df = pd.DataFrame(dataframe_store)
+    df = pd.DataFrame(flattened_data)
+
     # Gerando resposta
-    resposta = chat('dados: ' + str(df) + str(question))
+    resposta = chat(f'dados: {str(df)} + {str(question)}')
 
     # Retornando para os Outputs
     return html.Div([
