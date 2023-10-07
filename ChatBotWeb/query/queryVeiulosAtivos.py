@@ -1,0 +1,11 @@
+from ChatBotWeb.databaseconnection import connection
+
+# Pegar lat e long
+df = connection.mysql_query('''SELECT ESTADO, CIDADE, LATITUDE, LONGITUDE, COUNT(VEI.MODELO) AS VEICULOS_ATIVOS FROM BRASIL BRA
+    JOIN VEICULOS_ATIVOS VEI 
+    ON BRA.ID_BRASIL = VEI.ID_BRASIL
+    GROUP BY 1, 2, 3, 4''')
+
+df_gpt = connection.mysql_query('''SELECT ESTADO, CIDADE, VEI.MODELO AS VEICULOS_ATIVOS, VEI.PLACA FROM BRASIL BRA
+    JOIN VEICULOS_ATIVOS VEI 
+    ON BRA.ID_BRASIL = VEI.ID_BRASIL;''')

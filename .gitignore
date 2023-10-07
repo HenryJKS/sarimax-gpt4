@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# IDEA
+.idea/
+
 # C extensions
 *.so
 
@@ -120,7 +123,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+ChatBotWeb/chatAPI/.env
 .venv
 env/
 venv/
