@@ -124,6 +124,7 @@ celerybeat.pid
 
 # Environments
 ChatBotWeb/chatAPI/.env
+ChatBotWeb/databaseconnection/.env
 .venv
 env/
 venv/
